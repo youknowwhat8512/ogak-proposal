@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>오각 마케팅 제안 패키지 — 타겟·제안·시안 샘플</title>
+<style>
+  :root { --line: #e3e0d8; --ink: #1a1a1a; --muted: #6b6b6b; --accent: #1a1a1a; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow-x: hidden; }
+  body {
+    display: flex; flex-direction: column; height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, sans-serif;
+    color: var(--ink); background: #fff;
+  }
+  header { flex: 0 0 auto; border-bottom: 1px solid var(--line); padding: 10px 16px 0; }
+  .doc-title { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 8px; }
+  [role="tablist"] { display: flex; gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  [role="tab"] {
+    flex: 1 1 auto; min-width: 0; white-space: nowrap;
+    appearance: none; border: 0; background: transparent; cursor: pointer;
+    font: inherit; font-weight: 600; color: var(--muted);
+    padding: 10px 8px; border-bottom: 2px solid transparent;
+  }
+  [role="tab"][aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+  [role="tab"]:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .panels { flex: 1 1 auto; min-height: 0; position: relative; }
+  [role="tabpanel"] { position: absolute; inset: 0; }
+  [role="tabpanel"][hidden] { display: none; }
+  iframe { display: block; width: 100%; height: 100%; border: 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1 class="doc-title">오각 마케팅 제안 패키지</h1>
+  <div role="tablist" aria-label="제안 패키지 탭">
+    <button role="tab" id="tab-target" aria-controls="panel-target" aria-selected="true">타겟</button>
+    <button role="tab" id="tab-proposal" aria-controls="panel-proposal" aria-selected="false" tabindex="-1">제안</button>
+    <button role="tab" id="tab-sample" aria-controls="panel-sample" aria-selected="false" tabindex="-1">시안 샘플</button>
+  </div>
+</header>
+
+<div class="panels">
+  <div role="tabpanel" id="panel-target" aria-labelledby="tab-target" tabindex="0">
+    <iframe title="오각 × 과천 — 타깃 적합도 리포트" src="ogak-target-fit-visual-report.html?v=remove-signal-revisit-20260818" loading="eager"></iframe>
+  </div>
+  <div role="tabpanel" id="panel-proposal" aria-labelledby="tab-proposal" tabindex="0" hidden>
+    <iframe title="오각 온라인 홍보 준비 제안서 · 2026.08" src="ogak-initial-marketing-setup-proposal-2026-08.html?v=naver-place-example-v034-20260818" loading="lazy"></iframe>
+  </div>
+  <div role="tabpanel" id="panel-sample" aria-labelledby="tab-sample" tabindex="0" hidden>
+    <iframe title="오각 P-001 검토용 시안 선택 — 시안 1·2·3·기타" src="p001-home-sample-selector.html" loading="lazy"></iframe>
+  </div>
+</div>
+
+<script>
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  var keys = ["target", "proposal", "sample"];
+
+  function select(key, focus) {
+    if (keys.indexOf(key) < 0) key = "target";
+    tabs.forEach(function (tab) {
+      var k = tab.id.replace("tab-", "");
+      var on = k === key;
+      tab.setAttribute("aria-selected", on ? "true" : "false");
+      tab.tabIndex = on ? 0 : -1;
+      document.getElementById("panel-" + k).hidden = !on;
+      if (on && focus) tab.focus();
+    });
+    if (("#" + key) !== location.hash) {
+      history.replaceState(null, "", "#" + key);
+    }
+  }
+
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener("click", function () { select(tab.id.replace("tab-", ""), false); });
+    tab.addEventListener("keydown", function (e) {
+      var next = null;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") next = (i + 1) % tabs.length;
+      else if (e.key === "ArrowLeft" || e.key === "ArrowUp") next = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === "Home") next = 0;
+      else if (e.key === "End") next = tabs.length - 1;
+      if (next === null) return;
+      e.preventDefault();
+      select(tabs[next].id.replace("tab-", ""), true);
+    });
+  });
+
+  window.addEventListener("hashchange", function () {
+    select(location.hash.replace("#", ""), false);
+  });
+
+  select(location.hash.replace("#", ""), false);
+</script>
+</body>
+</html>

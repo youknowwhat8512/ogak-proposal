@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>오각 × 과천 — 타깃 적합도 리포트</title>
+  <style>
+    :root {
+      --ink:#181815;
+      --paper:#f5f1e8;
+      --paper-2:#ebe5d8;
+      --line:rgba(24,24,21,.18);
+      --muted:#706d64;
+      --red:#e65237;
+      --red-deep:#a52d21;
+      --gold:#caa24e;
+      --sage:#647b68;
+      --sky:#95b8c6;
+      --white:#fffdf7;
+      --radius:26px;
+      --shadow:0 24px 80px rgba(39,31,21,.13);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;background:var(--paper);color:var(--ink);
+      font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Noto Sans KR","Apple SD Gothic Neo",sans-serif;
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .shell{max-width:1240px;margin:0 auto;padding:28px}
+    .hero{
+      min-height:720px;position:relative;overflow:hidden;border-radius:36px;
+      background:var(--ink);color:var(--white);padding:54px 58px 48px;
+      box-shadow:var(--shadow);display:grid;grid-template-rows:auto 1fr auto;
+    }
+    .hero:before{
+      content:"";position:absolute;width:620px;height:620px;right:-160px;top:-170px;border-radius:50%;
+      background:radial-gradient(circle at 35% 35%,#ff8c6b 0 4%,var(--red) 4% 28%,#7f211a 28% 52%,transparent 52%);
+      opacity:.95;transform:rotate(-12deg)
+    }
+    .hero:after{
+      content:"";position:absolute;inset:0;pointer-events:none;opacity:.28;
+      background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
+      background-size:44px 44px;mask-image:linear-gradient(to bottom,transparent,#000 30%,#000)
+    }
+    .brand,.hero-copy,.hero-foot{position:relative;z-index:1}
+    .brand{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .ogak-lockup{display:flex;align-items:center;gap:14px;font-weight:800;letter-spacing:.12em}
+    .mark{width:46px;height:46px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.5);border-radius:50%;font-size:12px}
+    .meta{font-size:12px;letter-spacing:.1em;color:rgba(255,255,255,.64);text-transform:uppercase}
+    .hero-copy{align-self:center;max-width:860px;padding:76px 0 36px}
+    .eyebrow{font-size:12px;font-weight:750;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+    .hero .eyebrow{color:#ff8d72}
+    h1{font-size:clamp(48px,7.4vw,102px);line-height:.96;letter-spacing:-.065em;margin:18px 0 30px;font-weight:850}
+    .hero-lead{font-size:clamp(20px,2.2vw,31px);line-height:1.35;letter-spacing:-.035em;max-width:780px;color:rgba(255,255,255,.82)}
+    .hero-lead strong{color:#fff}
+    .hero-foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.18);border-radius:22px;overflow:hidden}
+    .hero-metric{background:rgba(10,10,9,.64);padding:24px 26px;backdrop-filter:blur(14px)}
+    .hero-metric b{display:block;font-size:28px;letter-spacing:-.04em;margin-bottom:4px}
+    .hero-metric span{font-size:12px;color:rgba(255,255,255,.62)}
+    .section{padding:112px 0 0}
+    .section-head{display:grid;grid-template-columns:170px 1fr;gap:30px;align-items:start;margin-bottom:44px}
+    .section-no{font-size:12px;font-weight:800;color:var(--red);letter-spacing:.15em}
+    h2{font-size:clamp(34px,4.8vw,66px);line-height:1.04;letter-spacing:-.055em;margin:0;max-width:840px}
+    .section-intro{font-size:18px;color:var(--muted);max-width:720px;margin:18px 0 0}
+    .verdict{
+      display:grid;grid-template-columns:1.15fr .85fr;min-height:390px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--white);box-shadow:var(--shadow)
+    }
+    .verdict-main{padding:50px;display:flex;flex-direction:column;justify-content:space-between}
+    .verdict-label{font-size:13px;font-weight:800;color:var(--red);letter-spacing:.1em}
+    .verdict-main h3{font-size:clamp(38px,5vw,68px);line-height:1.02;letter-spacing:-.055em;margin:22px 0}
+    .verdict-main p{max-width:570px;color:var(--muted);font-size:17px}
+    .verdict-side{background:var(--red);color:white;padding:46px;display:grid;align-content:center;gap:26px}
+    .signal{border-top:1px solid rgba(255,255,255,.35);padding-top:18px}
+    .signal b{font-size:28px;display:block;letter-spacing:-.04em}.signal span{font-size:13px;color:rgba(255,255,255,.72)}
+    .fit-list{display:grid;gap:14px}
+    .fit-row{
+      display:grid;grid-template-columns:190px 1fr 120px;gap:24px;align-items:center;
+      min-height:118px;padding:24px 28px;border-top:1px solid var(--line)
+    }
+    .fit-row:last-child{border-bottom:1px solid var(--line)}
+    .fit-title{font-weight:800;font-size:18px;letter-spacing:-.02em}
+    .fit-proof{font-size:14px;color:var(--muted)}
+    .fit-grade{justify-self:end;min-width:108px;text-align:center;border-radius:999px;padding:8px 12px;font-size:13px;font-weight:850}
+    .grade-high{background:var(--ink);color:#fff}.grade-mid-high{background:var(--gold);color:#1e190e}.grade-mid{background:var(--sky);color:#11262f}.grade-open{border:1px dashed var(--muted);color:var(--muted)}
+    .households{display:grid;grid-template-columns:.85fr 1.15fr;gap:24px;align-items:stretch}
+    .donut-card,.income-card,.districts{border:1px solid var(--line);border-radius:var(--radius);background:var(--white);padding:38px;box-shadow:0 18px 60px rgba(39,31,21,.08)}
+    .donut-wrap{display:grid;place-items:center;padding:16px 0 26px}
+    .donut{
+      width:min(310px,72vw);aspect-ratio:1;border-radius:50%;position:relative;
+      background:conic-gradient(var(--red) 0 21.87%,var(--gold) 21.87% 44.92%,var(--sage) 44.92% 92.74%,var(--paper-2) 92.74% 100%);
+    }
+    .donut:after{content:"29,667\A세대";white-space:pre;position:absolute;inset:20%;border-radius:50%;background:var(--white);display:grid;place-items:center;text-align:center;font-size:28px;font-weight:850;line-height:1.1;letter-spacing:-.04em}
+    .legend{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;font-size:13px}
+    .legend span{display:flex;align-items:center;gap:9px}.dot{width:10px;height:10px;border-radius:50%;flex:none}
+    .income-card{background:var(--ink);color:var(--white)}
+    .income-card .eyebrow{color:#ff8d72}.income-card h3,.donut-card h3,.districts h3{font-size:29px;letter-spacing:-.04em;margin:10px 0 26px}
+    .income-bars{display:grid;gap:26px;margin-top:38px}
+    .bar-label{display:flex;justify-content:space-between;gap:12px;font-size:13px;margin-bottom:9px}.bar-label b{font-size:18px}
+    .bar-track{height:15px;background:rgba(255,255,255,.12);border-radius:99px;overflow:hidden;position:relative}
+    .bar{height:100%;border-radius:99px;background:var(--red)}.bar.gyeonggi{background:rgba(255,255,255,.48)}
+    .income-note{margin-top:34px;padding:20px;border:1px solid rgba(255,255,255,.18);border-radius:18px;color:rgba(255,255,255,.75);font-size:14px}
+    .income-note strong{color:#fff;font-size:21px;display:block;margin-bottom:4px}
+    .district-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+    .district{background:var(--white);padding:34px;min-height:230px;position:relative;overflow:hidden}
+    .district:after{content:attr(data-no);position:absolute;right:18px;bottom:-36px;font-size:122px;font-weight:900;color:rgba(24,24,21,.035)}
+    .district h4{font-size:27px;margin:7px 0 16px;letter-spacing:-.04em}.district p{color:var(--muted);font-size:14px;max-width:380px}.district strong{display:block;margin-top:24px;color:var(--red)}
+    .logic{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .logic-step{padding:30px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.46);min-height:210px}
+    .logic-step b{font-size:12px;color:var(--red);letter-spacing:.12em}.logic-step h4{font-size:25px;line-height:1.15;letter-spacing:-.04em;margin:18px 0 12px}.logic-step p{font-size:14px;color:var(--muted)}
+    .caution{margin-top:20px;padding:28px 32px;background:repeating-linear-gradient(-45deg,#171714,#171714 14px,#211f1a 14px,#211f1a 28px);color:white;border-radius:20px;display:flex;justify-content:space-between;gap:30px;align-items:center}
+    .caution strong{font-size:20px}.caution span{font-size:13px;color:rgba(255,255,255,.65);max-width:650px}
+    footer{margin-top:110px;border-top:1px solid var(--line);padding:42px 0 30px;display:grid;grid-template-columns:1fr auto;gap:30px;color:var(--muted);font-size:12px}
+    .actions{position:fixed;right:24px;bottom:24px;z-index:10;display:flex;gap:8px}
+    .btn{appearance:none;border:0;border-radius:999px;padding:12px 17px;background:var(--ink);color:white;font:inherit;font-weight:750;box-shadow:0 9px 30px rgba(0,0,0,.2);cursor:pointer;text-decoration:none}
+    .btn.secondary{background:var(--white);color:var(--ink);border:1px solid var(--line)}
+    @media(max-width:760px){
+      .shell{padding:12px}.hero{min-height:700px;padding:28px 24px;border-radius:24px}.hero:before{width:410px;height:410px;right:-180px;top:-110px}
+      .brand{align-items:flex-start}.meta{text-align:right;max-width:140px}.hero-copy{padding:58px 0 30px}.hero-foot{grid-template-columns:1fr}.hero-metric{padding:17px 20px}.hero-metric b{font-size:23px}
+      .section{padding-top:82px}.section-head{grid-template-columns:1fr;gap:9px}.section-intro{font-size:16px}
+      .verdict{grid-template-columns:1fr}.verdict-main,.verdict-side{padding:30px}.verdict-main{min-height:340px}
+      .fit-row{grid-template-columns:1fr auto;gap:10px 16px;padding:22px 4px}.fit-proof{grid-column:1/-1}.fit-grade{grid-row:1;grid-column:2}
+      .households{grid-template-columns:1fr}.donut-card,.income-card,.districts{padding:26px 22px}.legend{grid-template-columns:1fr}
+      .district-grid{grid-template-columns:1fr}.district{min-height:210px;padding:28px 24px}
+      .logic{grid-template-columns:1fr}.logic-step{min-height:auto}.caution{align-items:flex-start;flex-direction:column}
+      footer{grid-template-columns:1fr}.actions{right:14px;bottom:14px}.btn.secondary{display:none}
+    }
+    @media print{
+      body{background:white}.shell{max-width:none;padding:0}.hero{border-radius:0;box-shadow:none;min-height:680px}.actions{display:none}.section{break-inside:avoid;padding-top:60px}.donut-card,.income-card,.districts,.verdict{box-shadow:none}a{text-decoration:none}
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero" aria-labelledby="report-title">
+      <div class="brand">
+        <div class="ogak-lockup"><span class="mark">五角</span><span>OGAK</span></div>
+        <div class="meta">Target Fit Report · Gwacheon<br>2026.08.16</div>
+      </div>
+      <div class="hero-copy">
+        <div class="eyebrow">Executive visual report</div>
+        <h1 id="report-title">오각의 타깃은<br>과천과 맞는가?</h1>
+        <p class="hero-lead"><strong>구조적 적합도는 높다.</strong><br>성인·가족·소득 구조는 맞지만, 실제 문화 수요는 운영 결과로 확인해야 한다.</p>
+      </div>
+      <div class="hero-foot" aria-label="핵심 시장 수치">
+        <div class="hero-metric"><b>65,278명</b><span>과천시 19세 이상 성인</span></div>
+        <div class="hero-metric"><b>29,667세대</b><span>과천시 전체 세대</span></div>
+        <div class="hero-metric"><b>2,373세대</b><span>첫해 8% 방문 운영 가설</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="verdict">
+      <header class="section-head">
+        <div class="section-no">01 / VERDICT</div>
+        <div><h2>방향은 맞다.<br>행동은 아직 모른다.</h2><p class="section-intro">과천의 인구·가구·소득 구조는 오각이 설정한 방문 형태를 시험하기에 충분하다. 다만 일치도는 수요 점수가 아니라 검증 우선순위다.</p></div>
+      </header>
+      <div class="verdict">
+        <div class="verdict-main">
+          <span class="verdict-label">종합 판정</span>
+          <h3>구조적 적합도<br>높음</h3>
+          <p>성인 개인, 성인 동반, 고학년 이상 자녀 동반 가족이 모두 존재할 수 있는 생활 구조와 상대적으로 높은 소득 구간을 확인했다.</p>
+        </div>
+        <aside class="verdict-side">
+          <div class="signal"><b>72.02%</b><span>집중 4개 동이 과천시 성인에서 차지하는 비중</span></div>
+          <div class="signal"><b>70.74%</b><span>집중 4개 동이 과천시 세대에서 차지하는 비중</span></div>
+          <div class="signal"><b>미확인</b><span>실제 문화 구매·60일 재방문·연 3회 이상 행동</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="fit">
+      <header class="section-head">
+        <div class="section-no">02 / TARGET FIT</div>
+        <div><h2>누가, 얼마나<br>맞아떨어지는가</h2></div>
+      </header>
+      <div class="fit-list">
+        <div class="fit-row"><div class="fit-title">성인 1인 방문</div><div class="fit-proof">1인 세대 6,487세대 · 21.87% — 혼자 사는 생활 단위의 보조 신호</div><div class="fit-grade grade-mid">보통</div></div>
+        <div class="fit-row"><div class="fit-title">성인끼리 동반</div><div class="fit-proof">2인 세대 6,838세대 · 23.05% — 부부·친구 방문을 시험할 생활 구조</div><div class="fit-grade grade-high">높음</div></div>
+        <div class="fit-row"><div class="fit-title">고학년 이상 가족</div><div class="fit-proof">3–4인 세대 14,188세대 · 47.82% / 원문동 59.03%</div><div class="fit-grade grade-mid-high">중간–높음</div></div>
+        <div class="fit-row"><div class="fit-title">30–49세 생활권</div><div class="fit-proof">과천시 25,681명 / 갈현동 7,688명 / 원문동 4,943명</div><div class="fit-grade grade-high">높음</div></div>
+        <div class="fit-row"><div class="fit-title">7천만–1억 소득 수준</div><div class="fit-proof">월 600만 원 이상 34.3% / 월 800만 원 이상 21.5%</div><div class="fit-grade grade-high">높음</div></div>
+      </div>
+    </section>
+
+    <section class="section" id="structure">
+      <header class="section-head">
+        <div class="section-no">03 / STRUCTURE</div>
+        <div><h2>가구 구조와<br>소득 분포</h2><p class="section-intro">하나는 ‘누구와 올 수 있는가’를, 다른 하나는 ‘어떤 가격 실험이 가능한가’를 보여준다.</p></div>
+      </header>
+      <div class="households">
+        <article class="donut-card">
+          <div class="eyebrow">Household composition</div><h3>과천시 세대 구성</h3>
+          <div class="donut-wrap"><div class="donut" role="img" aria-label="1인 세대 21.87%, 2인 세대 23.05%, 3–4인 세대 47.82%, 기타 7.26%"></div></div>
+          <div class="legend">
+            <span><i class="dot" style="background:var(--red)"></i>1인 21.87%</span>
+            <span><i class="dot" style="background:var(--gold)"></i>2인 23.05%</span>
+            <span><i class="dot" style="background:var(--sage)"></i>3–4인 47.82%</span>
+            <span><i class="dot" style="background:var(--paper-2)"></i>기타 7.26%</span>
+          </div>
+        </article>
+        <article class="income-card">
+          <div class="eyebrow">Household income context</div><h3>과천은 상위 소득 구간이 더 두껍다</h3>
+          <div class="income-bars">
+            <div><div class="bar-label"><span>월 500만 원 이상</span><b>44.0%</b></div><div class="bar-track"><div class="bar" style="width:88%"></div></div><div class="bar-label" style="margin-top:7px;color:rgba(255,255,255,.55)"><span>경기도 전체</span><span>28.7%</span></div><div class="bar-track"><div class="bar gyeonggi" style="width:57.4%"></div></div></div>
+            <div><div class="bar-label"><span>월 600만 원 이상</span><b>34.3%</b></div><div class="bar-track"><div class="bar" style="width:68.6%"></div></div><div class="bar-label" style="margin-top:7px;color:rgba(255,255,255,.55)"><span>경기도 전체</span><span>19.1%</span></div><div class="bar-track"><div class="bar gyeonggi" style="width:38.2%"></div></div></div>
+            <div><div class="bar-label"><span>월 800만 원 이상</span><b>21.5%</b></div><div class="bar-track"><div class="bar" style="width:43%"></div></div><div class="bar-label" style="margin-top:7px;color:rgba(255,255,255,.55)"><span>경기도 전체</span><span>8.8%</span></div><div class="bar-track"><div class="bar gyeonggi" style="width:17.6%"></div></div></div>
+          </div>
+          <div class="income-note">고소득층이 분포해 있다.</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="districts">
+      <header class="section-head">
+        <div class="section-no">04 / NEIGHBORHOODS</div>
+        <div><h2>네 생활권,<br>서로 다른 첫 역할</h2><p class="section-intro">동별 순위를 확정하는 대신, 각 생활권이 가장 잘 검증할 수 있는 방문 형태를 배정한다.</p></div>
+      </header>
+      <div class="district-grid">
+        <article class="district" data-no="01"><div class="eyebrow">Direct neighborhood</div><h4>갈현동</h4><p>30–49세 7,688명, 0–18세 5,167명. 오각이 위치한 직접 생활권.</p><strong>성인 1인 · 성인 동반 · 보호자</strong></article>
+        <article class="district" data-no="02"><div class="eyebrow">Family structure</div><h4>원문동</h4><p>3–4인 세대 비율 59.03%, 40–49세 3,010명.</p><strong>고학년 이상 자녀 동반 가족</strong></article>
+        <article class="district" data-no="03"><div class="eyebrow">Adult urban audience</div><h4>별양동</h4><p>19세 이상 비율 81.32%, 성인 10,106명.</p><strong>성인 개인 · 성인끼리 동반</strong></article>
+        <article class="district" data-no="04"><div class="eyebrow">Weeknight audience</div><h4>중앙동</h4><p>19세 이상 85.31%, 1–2인 세대 46.14%.</p><strong>평일 저녁 개인 · 소규모 동반</strong></article>
+      </div>
+    </section>
+
+    <section class="section" id="proof">
+      <header class="section-head">
+        <div class="section-no">05 / PROOF</div>
+        <div><h2>일치도를<br>수요로 바꾸는 법</h2><p class="section-intro">인구 구조는 출발점이다. 실제 운영에서 아래 세 단계가 이어져야 ‘맞는 타깃’이라고 결론낼 수 있다.</p></div>
+      </header>
+      <div class="logic">
+        <article class="logic-step"><b>STEP 01</b><h4>첫 방문</h4><p>방문 형태, 프로그램, 과천시 내·외, 유료 여부를 최소 단위로 기록한다.</p></article>
+        <article class="logic-step"><b>STEP 02</b><h4>60일 내 재방문</h4><p>첫 경험 뒤 어떤 프로그램·시간·안내가 두 번째 방문을 만드는지 확인한다.</p></article>
+        <article class="logic-step"><b>STEP 03</b><h4>사랑방 핵심</h4><p>연 3회·6회 이상 반복 참여가 실제로 나타날 때 반복 방문 적합성을 인정한다.</p></article>
+      </div>
+      <div class="caution"><strong>높음 ≠ 수요 확정</strong><span>1인 세대는 혼자 방문한 성인이 아니고, 3–4인 세대는 고학년 자녀 가구가 아니며, 소득 분포는 문화예술 구매의 증거가 아니다.</span></div>
+    </section>
+
+    <footer>
+      <div>OGAK Target Fit Visual Report · 내부 의사결정용 파생 아티팩트<br>정본: <a href="../docs/01-discovery/research-overview-2026-08-16.md">과천시장 타깃 전략 리포트</a></div>
+      <div>근거: 행정안전부 주민등록 · KOSIS 경기도사회조사 2022<br>관측값과 운영 가설을 분리해 읽는다.</div>
+    </footer>
+  </main>
+  <div class="actions" aria-label="문서 동작">
+    <a class="btn secondary" href="#verdict">처음부터 보기</a>
+    <button class="btn" type="button" onclick="window.print()">PDF로 인쇄</button>
+  </div>
+</body>
+</html>

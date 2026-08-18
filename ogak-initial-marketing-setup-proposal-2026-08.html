@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>오각 온라인 홍보 준비 제안서 · 2026.08</title>
+  <meta name="description" content="9월에는 필요한 정보를 준비하고, 10월부터 실제 방문 결과를 보며 고치는 오각 온라인 홍보 준비 제안서">
+  <style>
+    :root{
+      --ink:#181815;--paper:#f5f1e8;--paper-2:#ebe5d8;
+      --line:rgba(24,24,21,.18);--muted:#706d64;
+      --red:#e65237;--red-deep:#a52d21;--gold:#caa24e;--sage:#647b68;--sky:#95b8c6;
+      --white:#fffdf7;
+      --naver:#03c75a;--google:#4285f4;--kakao:#f7d100;--home:#181815;--book:#e65237;
+      --radius:26px;--shadow:0 24px 80px rgba(39,31,21,.13);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);
+      font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Noto Sans KR","Apple SD Gothic Neo",sans-serif;
+      line-height:1.55}
+    a{color:inherit}
+    .shell{max-width:1240px;margin:0 auto;padding:28px}
+
+    /* HERO */
+    .hero{min-height:700px;position:relative;overflow:hidden;border-radius:36px;
+      background:var(--ink);color:var(--white);padding:54px 58px 48px;box-shadow:var(--shadow);
+      display:grid;grid-template-rows:auto 1fr auto}
+    .hero:before{content:"";position:absolute;width:620px;height:620px;right:-160px;top:-170px;border-radius:50%;
+      background:radial-gradient(circle at 35% 35%,#ff8c6b 0 4%,var(--red) 4% 28%,#7f211a 28% 52%,transparent 52%);
+      opacity:.95;transform:rotate(-12deg)}
+    .hero:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.28;
+      background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
+      background-size:44px 44px;mask-image:linear-gradient(to bottom,transparent,#000 30%,#000)}
+    .brand,.hero-copy,.hero-foot{position:relative;z-index:1}
+    .brand{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .ogak-lockup{display:flex;align-items:center;gap:14px;font-weight:800;letter-spacing:.12em}
+    .mark{width:46px;height:46px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.5);border-radius:50%;font-size:12px}
+    .meta{font-size:12px;letter-spacing:.1em;color:rgba(255,255,255,.64);text-transform:uppercase;text-align:right}
+    .hero-copy{align-self:center;max-width:900px;padding:64px 0 34px}
+    .eyebrow{font-size:12px;font-weight:750;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+    .hero .eyebrow{color:#ff8d72}
+    h1{font-size:clamp(40px,6.4vw,88px);line-height:.98;letter-spacing:-.06em;margin:18px 0 26px;font-weight:850}
+    .hero-lead{font-size:clamp(18px,2vw,28px);line-height:1.36;letter-spacing:-.03em;max-width:820px;color:rgba(255,255,255,.82)}
+    .hero-lead strong{color:#fff}
+    .hero-foot{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.18);border-radius:22px;overflow:hidden}
+    .hero-metric{background:rgba(10,10,9,.64);padding:22px 24px;backdrop-filter:blur(14px)}
+    .hero-metric b{display:block;font-size:26px;letter-spacing:-.04em;margin-bottom:4px}
+    .hero-metric span{font-size:12px;color:rgba(255,255,255,.62)}
+
+    /* SECTIONS */
+    .section{padding:104px 0 0}
+    .section-head{display:grid;grid-template-columns:170px 1fr;gap:30px;align-items:start;margin-bottom:44px}
+    .section-no{font-size:12px;font-weight:800;color:var(--red);letter-spacing:.15em}
+    h2{font-size:clamp(32px,4.4vw,60px);line-height:1.04;letter-spacing:-.05em;margin:0;max-width:840px}
+    .section-intro{font-size:18px;color:var(--muted);max-width:720px;margin:18px 0 0}
+
+    /* CALLOUT baseline */
+    .callout{margin:0 0 40px;padding:26px 30px;border-radius:20px;background:var(--white);border:1px solid var(--line);
+      display:flex;gap:20px;align-items:flex-start;box-shadow:0 12px 40px rgba(39,31,21,.07)}
+    .callout .flag{flex:none;font-size:12px;font-weight:850;letter-spacing:.06em;color:#fff;background:var(--red);border-radius:999px;padding:7px 14px;margin-top:2px}
+    .callout p{margin:0;font-size:15.5px;color:var(--ink)}
+    .callout p strong{color:var(--red-deep)}
+
+    /* TWO-LANE TIMELINE */
+    .lanes{display:grid;grid-template-columns:1fr 26px 1fr;gap:0;align-items:stretch}
+    .lane{border:1px solid var(--line);border-radius:var(--radius);background:var(--white);padding:34px 32px;box-shadow:0 16px 54px rgba(39,31,21,.07)}
+    .lane.now{background:var(--white)}
+    .lane.next{background:rgba(255,255,255,.5)}
+    .lane-tag{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:850;letter-spacing:.08em;
+      border-radius:999px;padding:7px 14px;margin-bottom:6px}
+    .lane.now .lane-tag{background:var(--ink);color:#fff}
+    .lane.next .lane-tag{background:var(--paper-2);color:var(--ink);border:1px solid var(--line)}
+    .lane h3{font-size:28px;letter-spacing:-.04em;margin:10px 0 6px}
+    .lane .lane-sub{color:var(--muted);font-size:14px;margin:0 0 24px}
+    .lane ul{list-style:none;margin:0;padding:0;display:grid;gap:0}
+    .lane li{display:grid;grid-template-columns:96px 1fr;gap:16px;padding:15px 0;border-top:1px solid var(--line);align-items:baseline}
+    .lane li:first-child{border-top:0}
+    .lane li b{font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--red)}
+    .lane.next li b{color:var(--sage)}
+    .lane li span{font-size:15px}
+    .baseline{position:relative;display:grid;place-items:center}
+    .baseline .rail{width:2px;background:repeating-linear-gradient(var(--red) 0 8px,transparent 8px 16px);height:100%}
+    .baseline .pin{position:absolute;top:0;background:var(--red);color:#fff;font-size:11px;font-weight:850;
+      writing-mode:vertical-rl;text-orientation:mixed;padding:14px 8px;border-radius:999px;letter-spacing:.1em;
+      box-shadow:0 8px 24px rgba(166,45,33,.4);white-space:nowrap}
+
+    /* CHANNEL ICON CARDS */
+    .channels{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .ch{border:1px solid var(--line);border-radius:22px;background:var(--white);padding:26px 26px 24px;
+      box-shadow:0 12px 40px rgba(39,31,21,.06);display:flex;flex-direction:column;gap:12px;min-height:224px}
+    .ch-top{display:flex;align-items:center;gap:14px}
+    .ch-icon{width:46px;height:46px;border-radius:13px;flex:none;display:grid;place-items:center;color:#fff;font-weight:850;font-size:18px;letter-spacing:-.02em}
+    .ch-icon.naver{background:var(--naver)}
+    .ch-icon.nsearch{background:var(--naver);opacity:.86}
+    .ch-icon.google{background:var(--google)}
+    .ch-icon.kakao{background:var(--kakao);color:#3a2a00}
+    .ch-icon.home{background:var(--home)}
+    .ch-icon.book{background:var(--book)}
+    .ch-name{font-size:18px;font-weight:800;letter-spacing:-.02em}
+    .ch-role{font-size:12px;color:var(--muted)}
+    .ch-prep{font-size:14px;color:var(--ink);flex:1}
+    .ch-bound{font-size:12.5px;color:var(--red-deep);border-top:1px dashed var(--line);padding-top:12px}
+    .ch-bound b{font-weight:800}
+    .ch-example{margin-top:16px;border:1px solid var(--line);border-radius:22px;background:var(--white);box-shadow:0 12px 40px rgba(39,31,21,.06);overflow:hidden}
+    .ch-example>summary{cursor:pointer;list-style:none;padding:18px 24px;font-size:14px;font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+    .ch-example>summary::-webkit-details-marker{display:none}
+    .ch-example>summary:before{content:"▸";color:var(--google);font-weight:800}
+    .ch-example[open]>summary:before{content:"▾"}
+    .ch-example-body{padding:0 24px 24px}
+    .ch-example-body img{display:block;width:100%;max-width:760px;height:auto;margin:0 auto;border:1px solid var(--line);border-radius:14px}
+    .ch-example-cap{font-size:12.5px;color:var(--muted);max-width:760px;margin:12px auto 0;text-align:center}
+
+    /* FUNNEL */
+    .funnel-groups{display:grid;grid-template-columns:2fr 2fr 2fr;gap:14px;margin-bottom:14px}
+    .fg{border-radius:14px 14px 0 0;padding:11px 16px;font-size:12px;font-weight:850;letter-spacing:.05em;color:#fff;text-align:center}
+    .fg.relation{background:var(--sage)}
+    .fg.mid{background:var(--gold);color:#241c07}
+    .fg.final{background:var(--red)}
+    .funnel{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;align-items:stretch}
+    .fstep{border:1px solid var(--line);border-radius:16px;background:var(--white);padding:20px 16px;position:relative;
+      display:flex;flex-direction:column;gap:8px;min-height:158px;box-shadow:0 10px 34px rgba(39,31,21,.05)}
+    .fstep .fno{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.08em}
+    .fstep h4{margin:0;font-size:16px;letter-spacing:-.03em;line-height:1.2}
+    .fstep p{margin:0;font-size:12.5px;color:var(--muted)}
+    .fstep .kind{margin-top:auto;font-size:11px;font-weight:800;letter-spacing:.04em;padding:4px 9px;border-radius:999px;align-self:flex-start}
+    .kind.relation{background:rgba(100,123,104,.16);color:#3f5443}
+    .kind.mid{background:rgba(202,162,78,.2);color:#6d520f}
+    .kind.final{background:rgba(230,82,55,.14);color:var(--red-deep)}
+    .fstep .opt{position:absolute;top:12px;right:12px;font-size:10px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 7px}
+    .funnel-note{margin-top:22px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+    .fncard{border:1px solid var(--line);border-radius:16px;padding:20px 22px;background:rgba(255,255,255,.5)}
+    .fncard b{display:block;font-size:15px;letter-spacing:-.02em;margin-bottom:6px}
+    .fncard.relation b{color:var(--sage)}.fncard.mid b{color:#6d520f}.fncard.final b{color:var(--red)}
+    .fncard p{margin:0;font-size:13px;color:var(--muted)}
+
+    /* 17 CONTENT */
+    .count-hero{display:grid;grid-template-columns:.7fr 2.3fr;gap:24px;align-items:stretch}
+    .count-big{border:1px solid var(--line);border-radius:var(--radius);background:var(--ink);color:var(--white);
+      padding:40px 34px;display:flex;flex-direction:column;justify-content:center;box-shadow:var(--shadow)}
+    .count-big .num{font-size:clamp(72px,10vw,124px);font-weight:900;line-height:.9;letter-spacing:-.06em}
+    .count-big .num small{font-size:.3em;font-weight:800;letter-spacing:0;margin-left:6px}
+    .count-big p{margin:14px 0 0;font-size:14px;color:rgba(255,255,255,.72)}
+    .cpacks{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .cpack{border:1px solid var(--line);border-radius:20px;background:var(--white);padding:22px 22px 20px;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(39,31,21,.06)}
+    .cpack .cp-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:12px}
+    .cpack .cp-let{font-size:12px;font-weight:850;color:var(--red);letter-spacing:.1em}
+    .cpack .cp-n{font-size:40px;font-weight:900;letter-spacing:-.05em;line-height:1}
+    .cpack h4{margin:0 0 12px;font-size:16px;letter-spacing:-.03em}
+    .cpack ol{margin:0;padding-left:18px;display:grid;gap:6px}
+    .cpack li{font-size:12.5px;color:var(--muted);line-height:1.35}
+    .cpack li b{color:var(--ink);font-weight:700}
+    .formula{margin-top:22px;padding:20px 26px;border-radius:18px;background:var(--paper-2);border:1px solid var(--line);
+      display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;font-weight:800;letter-spacing:-.01em}
+    .formula .chip{background:var(--white);border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:14px}
+    .formula .op{color:var(--muted);font-size:18px}
+    .formula .eq{margin-left:auto;font-size:20px;color:var(--red-deep)}
+    .formula .eq b{font-size:26px}
+
+    /* MEASURE TABLE */
+    .measure{display:grid;gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--white);box-shadow:0 16px 54px rgba(39,31,21,.07)}
+    .mrow{display:grid;grid-template-columns:1.1fr 1.5fr 150px;gap:20px;padding:20px 28px;border-top:1px solid var(--line);align-items:center}
+    .mrow.head{background:var(--ink);color:#fff;font-size:12px;letter-spacing:.08em;font-weight:800;border-top:0}
+    .mrow .mstage{font-weight:800;font-size:16px;letter-spacing:-.02em}
+    .mrow .munit{font-size:13.5px;color:var(--muted)}
+    .verdict-pill{justify-self:start;font-size:12px;font-weight:850;border-radius:999px;padding:7px 14px}
+    .vp-diag{background:var(--sky);color:#11262f}
+    .vp-rel{background:rgba(100,123,104,.18);color:#3f5443;border:1px solid rgba(100,123,104,.4)}
+    .vp-mid{background:var(--gold);color:#241c07}
+    .vp-final{background:var(--ink);color:#fff}
+    .vp-keep{background:var(--red);color:#fff}
+    .mrow.head .verdict-pill{background:transparent;color:#fff;padding:0}
+
+    /* ROLES */
+    .roles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .role{border:1px solid var(--line);border-radius:20px;background:var(--white);padding:26px 24px;display:flex;flex-direction:column;gap:10px;min-height:280px;box-shadow:0 12px 40px rgba(39,31,21,.06)}
+    .role-badge{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:850;color:#fff;font-size:15px;letter-spacing:-.02em}
+    .role:nth-child(1) .role-badge{background:var(--red)}
+    .role:nth-child(2) .role-badge{background:var(--gold);color:#241c07}
+    .role:nth-child(3) .role-badge{background:var(--sage)}
+    .role:nth-child(4) .role-badge{background:var(--sky);color:#11262f}
+    .role h4{margin:2px 0 0;font-size:19px;letter-spacing:-.03em}
+    .role .role-tag{font-size:11px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
+    .role .r-line{font-size:13px;padding:10px 0;border-top:1px solid var(--line)}
+    .role .r-line b{display:block;font-size:11px;color:var(--red);letter-spacing:.06em;margin-bottom:3px}
+    .role.next-b:nth-child(3) .r-line b{color:var(--sage)}
+    .role .r-bound{margin-top:auto;font-size:12px;color:var(--red-deep);border-top:1px dashed var(--line);padding-top:10px}
+    .gov{margin-top:18px;padding:24px 30px;border-radius:20px;background:var(--ink);color:#fff;display:flex;flex-wrap:wrap;gap:14px 40px}
+    .gov div{font-size:14px;color:rgba(255,255,255,.82)}
+    .gov b{color:#fff}
+
+    /* CAUTION */
+    .caution{margin-top:26px;padding:28px 32px;background:repeating-linear-gradient(-45deg,#171714,#171714 14px,#211f1a 14px,#211f1a 28px);
+      color:#fff;border-radius:20px;display:flex;justify-content:space-between;gap:30px;align-items:center}
+    .caution strong{font-size:20px}.caution span{font-size:13px;color:rgba(255,255,255,.68);max-width:720px}
+
+    footer{margin-top:104px;border-top:1px solid var(--line);padding:42px 0 30px;display:grid;grid-template-columns:1fr auto;gap:30px;color:var(--muted);font-size:12px}
+
+    .actions{position:fixed;right:24px;bottom:24px;z-index:10;display:flex;gap:8px}
+    .btn{appearance:none;border:0;border-radius:999px;padding:12px 17px;background:var(--ink);color:#fff;font:inherit;font-weight:750;box-shadow:0 9px 30px rgba(0,0,0,.2);cursor:pointer;text-decoration:none}
+    .btn.secondary{background:var(--white);color:var(--ink);border:1px solid var(--line)}
+
+    @media(max-width:760px){
+      .shell{padding:12px}
+      .hero{min-height:680px;padding:28px 22px;border-radius:24px}.hero:before{width:400px;height:400px;right:-170px;top:-100px}
+      .brand{align-items:flex-start}.meta{max-width:150px}.hero-copy{padding:52px 0 28px}
+      .hero-foot{grid-template-columns:1fr 1fr}.hero-metric{padding:16px 18px}.hero-metric b{font-size:22px}
+      .section{padding-top:74px}.section-head{grid-template-columns:1fr;gap:8px}.section-intro{font-size:16px}
+      .callout{flex-direction:column;gap:12px}
+      .lanes{grid-template-columns:1fr;gap:16px}
+      .baseline{min-height:60px}.baseline .rail{width:100%;height:2px;background:repeating-linear-gradient(90deg,var(--red) 0 8px,transparent 8px 16px)}
+      .baseline .pin{writing-mode:horizontal-tb;top:50%;transform:translateY(-50%)}
+      .lane li{grid-template-columns:80px 1fr;gap:12px}
+      .channels{grid-template-columns:1fr}.ch{min-height:auto}
+      .funnel-groups{grid-template-columns:1fr}.fg{border-radius:14px}
+      .funnel{grid-template-columns:1fr}.fstep{min-height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:6px 12px}
+      .fstep h4{flex:1}.fstep p{flex-basis:100%}.fstep .kind{margin:0}.fstep .opt{position:static}
+      .funnel-note{grid-template-columns:1fr}
+      .count-hero{grid-template-columns:1fr}.cpacks{grid-template-columns:1fr 1fr}
+      .formula{flex-direction:column;align-items:flex-start}.formula .eq{margin-left:0}
+      .mrow{grid-template-columns:1fr auto;gap:8px 14px;padding:18px 18px}.mrow .munit{grid-column:1/-1}.mrow.head{display:none}
+      .roles{grid-template-columns:1fr}.role{min-height:auto}
+      .gov{flex-direction:column;gap:12px}
+      .caution{flex-direction:column;align-items:flex-start}
+      footer{grid-template-columns:1fr}.actions{right:14px;bottom:14px}.btn.secondary{display:none}
+    }
+    @media print{
+      body{background:#fff}.shell{max-width:none;padding:0}
+      .hero{border-radius:0;box-shadow:none;min-height:640px}
+      .actions{display:none}.section{break-inside:avoid;padding-top:52px}
+      .lane,.ch,.fstep,.cpack,.measure,.role,.count-big{box-shadow:none}
+      a{text-decoration:none}
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="doc-title">
+      <div class="brand">
+        <div class="ogak-lockup"><span class="mark">五角</span><span>OGAK</span></div>
+        <div class="meta">온라인 홍보 준비 제안서<br>v0.3.4 · 2026.08.18</div>
+      </div>
+      <div class="hero-copy">
+        <div class="eyebrow">오각 온라인 홍보 준비 제안서</div>
+        <h1 id="doc-title">9월엔 준비,<br>10월부턴 실제 방문을<br>보며 고칩니다</h1>
+        <p class="hero-lead"><strong>9월에는 손님이 오각을 찾고 방문할 수 있는 길을 준비합니다.</strong> 10월부터는 실제 방문 결과를 보며 부족한 안내를 고칩니다.</p>
+      </div>
+      <div class="hero-foot" aria-label="핵심 수치">
+        <div class="hero-metric"><b>2단계</b><span>9월 준비 · 10월부터 개선</span></div>
+        <div class="hero-metric"><b>17건</b><span>처음 준비할 글과 안내</span></div>
+        <div class="hero-metric"><b>6곳</b><span>네이버·구글·카카오·홈페이지·예약</span></div>
+        <div class="hero-metric"><b>10.01</b><span>오각향 오픈일</span></div>
+      </div>
+    </section>
+
+    <!-- 00 BASELINE -->
+    <section class="section" id="overview">
+      <header class="section-head">
+        <div class="section-no">00 / 기준</div>
+        <div>
+          <h2>한눈에 보는<br>두 단계</h2>
+          <p class="section-intro">인구와 세대 숫자는 어디서 먼저 시험할지 정하는 참고 자료입니다. 실제 문화 수요와 재방문은 아직 확인되지 않았습니다.</p>
+        </div>
+      </header>
+      <div class="callout" role="note">
+        <span class="flag">오픈일</span>
+        <p><strong>10월 1일은 오각향 오픈일입니다.</strong></p>
+      </div>
+
+      <!-- TWO-LANE TIMELINE -->
+      <div class="lanes" aria-label="9월과 10월 이후 두 단계">
+        <div class="lane now">
+          <span class="lane-tag">● 이번</span>
+          <h3>9월 — 이번에 할 것</h3>
+          <p class="lane-sub">손님이 오각을 찾고 방문할 수 있는 길을 준비합니다</p>
+          <ul>
+            <li><b>온라인 장소</b><span>네이버·구글·카카오를 누가 관리하는지와 쓸 수 있는 기능을 확인</span></li>
+            <li><b>홈페이지</b><span>홈페이지에 최신 정보를 모으고 네이버 예약을 쓸 수 있는지 확인</span></li>
+            <li><b>글과 안내</b><span>처음 필요한 글과 안내 17건을 만들고 확인</span></li>
+            <li><b>숫자 세기</b><span>어디서 왔는지, 저장·친구 추가·예약·방문·재방문을 따로 셀 준비</span></li>
+            <li><b>끝맺음</b><span>사실·연결 주소·휴대전화 화면·확인 기록이 갖춰졌는지 점검</span></li>
+          </ul>
+        </div>
+        <div class="baseline" aria-hidden="true">
+          <div class="rail"></div>
+          <div class="pin">10월 1일 오각향 오픈</div>
+        </div>
+        <div class="lane next">
+          <span class="lane-tag">○ 다음</span>
+          <h3>10월부터 — 다음에 할 것</h3>
+          <p class="lane-sub">실제 방문 결과를 보고 안내와 연결을 개선합니다</p>
+          <ul>
+            <li><b>온라인 장소</b><span>손님 반응을 보고 소개와 연결 위치를 개선</span></li>
+            <li><b>홈페이지</b><span>예약 길에서 어디서 멈추는지 살펴보고 개선</span></li>
+            <li><b>글과 안내</b><span>새 프로그램과 자주 묻는 질문에 맞춰 새 안내 제작</span></li>
+            <li><b>숫자 세기</b><span>이름 없이 숫자만 정리해 실제 방문과 재방문을 살핌</span></li>
+            <li><b>끝맺음</b><span>실제 방문과 재방문이 나아지는지 살펴 판단</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01 CHANNELS -->
+    <section class="section" id="channels">
+      <header class="section-head">
+        <div class="section-no">01 / 채널</div>
+        <div>
+          <h2>어디에서<br>찾아오게 할까요</h2>
+          <p class="section-intro">홈페이지는 모든 정보를 한곳에 모아 두는 곳입니다. 다른 곳은 발견·소식·예약 이동을 나눠 맡습니다. 온라인 장소와 채널의 기본적인 세팅을 먼저 진행합니다.</p>
+        </div>
+      </header>
+      <div class="channels">
+        <article class="ch">
+          <div class="ch-top"><div class="ch-icon naver" aria-hidden="true">N</div><div><div class="ch-name">네이버 플레이스</div><div class="ch-role">지도에서 찾고 저장으로 다시 보기</div></div></div>
+          <p class="ch-prep">오각의 각 공간은 개별로 만들되, 홈페이지 등 연결 정보는 한곳으로 모읍니다.</p>
+          <div class="ch-bound">주의 · 저장 수를 <b>방문 수로 보지 않음</b></div>
+        </article>
+        <article class="ch">
+          <div class="ch-top"><div class="ch-icon nsearch" aria-hidden="true">N</div><div><div class="ch-name">네이버 검색</div><div class="ch-role">검색한 손님을 홈페이지로 안내</div></div></div>
+          <p class="ch-prep">사이트 소개와 소식 초안을 준비합니다.</p>
+          <div class="ch-bound">주의 · 검색 순위를 약속하거나 <b>검색만 노린 허구의 글 금지</b></div>
+        </article>
+        <article class="ch">
+          <div class="ch-top"><div class="ch-icon google" aria-hidden="true">G</div><div><div class="ch-name">구글 검색</div><div class="ch-role">검색 결과 업그레이드</div></div></div>
+          <p class="ch-prep">구글 비즈니스를 통해 검색 결과를 업그레이드합니다.</p>
+          <div class="ch-bound">주의 · <b>확인하지 않은 운영시간·후기 넣지 않음</b></div>
+        </article>
+        <article class="ch">
+          <div class="ch-top"><div class="ch-icon kakao" aria-hidden="true">K</div><div><div class="ch-name">카카오톡 채널</div><div class="ch-role">원하는 사람에게 새 프로그램 소식</div></div></div>
+          <p class="ch-prep">개설 상태, 소개, 홈 화면, 친구 추가 기능을 확인합니다.</p>
+          <div class="ch-bound">주의 · <b>예약·1대1 문의·정해진 날짜의 반복 발송에 쓰지 않음</b></div>
+        </article>
+        <article class="ch">
+          <div class="ch-top"><div class="ch-icon home" aria-hidden="true">五</div><div><div class="ch-name">홈페이지</div><div class="ch-role">공간·프로그램·방문 정보를 한곳에</div></div></div>
+          <p class="ch-prep">프로그램 설명, 예약 상태, 각 온라인 장소로 가는 길을 준비합니다.</p>
+          <div class="ch-bound">주의 · 공개와 주소 변경은 <b>따로 확인받음</b></div>
+        </article>
+        <article class="ch">
+          <div class="ch-top"><div class="ch-icon book" aria-hidden="true">예</div><div><div class="ch-name">확인받은 외부 예약</div><div class="ch-role">신청·예약 받기</div></div></div>
+          <p class="ch-prep"><b>네이버 예약을 쓸 수 있는지 확인</b>하고, 안 되면 다른 서비스를 고를 기준을 정합니다.</p>
+          <div class="ch-bound">주의 · 네이버 예약은 <b>아직 선택 전</b>, <b>카카오 예약 쓰지 않음</b></div>
+        </article>
+      </div>
+      <details class="ch-example">
+        <summary>네이버 플레이스 구성 예시 보기</summary>
+        <div class="ch-example-body">
+          <img src="assets/proposal/naver-place-example.png" alt="네이버에서 그라운드 시소를 검색하면 센트럴·한남·용산·이스트 등 여러 지점이 목록으로 나오고, 오른쪽에 그라운드시소 한남 전시관 상세 화면에서 전시 정보와 예약·예매 버튼이 함께 보이는 예시">
+          <p class="ch-example-cap">공간별 네이버 플레이스를 각각 만들고, 각 장소에서 같은 홈페이지로 연결하는 예시입니다. 실제 화면과 기능은 네이버 운영 정책에 따라 달라질 수 있습니다.</p>
+        </div>
+      </details>
+      <details class="ch-example">
+        <summary>구글 검색 결과 예시 보기</summary>
+        <div class="ch-example-body">
+          <img src="assets/proposal/google-search-result-example.png" alt="구글 검색 결과에서 홈페이지 대표 제목 아래에 ARTISTS·ABOUT·TOURS·CONCERTS 같은 주요 메뉴 링크가 함께 표시된 예시">
+          <p class="ch-example-cap">구글 검색 결과에 홈페이지의 주요 메뉴가 함께 보이는 예시입니다. 실제 표시는 구글이 정하므로 같은 모양을 보장할 수 없습니다.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- 02 FUNNEL -->
+    <section class="section" id="funnel">
+      <header class="section-head">
+        <div class="section-no">02 / 흐름</div>
+        <div>
+          <h2>손님이 찾아와<br>다시 방문하기까지</h2>
+          <p class="section-intro">저장 수와 친구 수는 다시 찾아볼 가능성을 보여줍니다. 예약은 방문으로 가는 도중의 일입니다. 실제 방문과 재방문을 가장 중요한 결과로 봅니다. 이 셋을 같은 숫자로 합치지 않습니다.</p>
+        </div>
+      </header>
+      <div class="funnel-groups" aria-hidden="true">
+        <div class="fg relation">다시 올 가능성</div>
+        <div class="fg mid">예약으로 가는 길</div>
+        <div class="fg final">가장 중요한 결과</div>
+      </div>
+      <div class="funnel" aria-label="발견→저장·친구→홈페이지→예약 상태→외부 예약→예약 완료→방문→재방문 흐름">
+        <div class="fstep"><div class="fno">STEP 01</div><h4>발견</h4><p>네이버·구글·SNS·카카오</p><span class="kind relation">가능성</span></div>
+        <div class="fstep"><span class="opt">선택</span><div class="fno">STEP 02</div><h4>저장·친구</h4><p>네이버 저장 또는 카카오 친구 추가</p><span class="kind relation">가능성</span></div>
+        <div class="fstep"><div class="fno">STEP 03</div><h4>홈페이지</h4><p>최신 프로그램·방문 정보 확인</p><span class="kind relation">확인</span></div>
+        <div class="fstep"><div class="fno">STEP 04</div><h4>예약 상태</h4><p>예약 가능 여부 확인</p><span class="kind mid">예약</span></div>
+        <div class="fstep"><div class="fno">STEP 05</div><h4>외부 예약</h4><p>확인받은 외부 예약으로 이동·완료</p><span class="kind mid">예약</span></div>
+        <div class="fstep"><div class="fno">STEP 06</div><h4>방문</h4><p>실제 방문·관람 완료</p><span class="kind final">방문</span></div>
+        <div class="fstep"><div class="fno">STEP 07</div><h4>재방문</h4><p>다음 프로그램 발견 → 재방문</p><span class="kind final">방문</span></div>
+      </div>
+      <div class="funnel-note">
+        <div class="fncard relation"><b>다시 올 가능성</b><p>네이버 저장과 카카오 친구 추가입니다. 다시 찾아올 가능성을 보여주는 숫자이며 방문 수가 아닙니다.</p></div>
+        <div class="fncard mid"><b>예약으로 가는 길</b><p>확인받은 외부 예약으로 이동해 예약을 마치는 일입니다. 방문으로 가는 도중이지 방문 자체는 아닙니다.</p></div>
+        <div class="fncard final"><b>가장 중요한 결과</b><p>실제 방문·관람 완료와 재방문입니다. 첫 90일에는 신청 수보다 실제 방문을 중요하게 봅니다.</p></div>
+      </div>
+    </section>
+
+    <!-- 03 CONTENT 17 -->
+    <section class="section" id="content">
+      <header class="section-head">
+        <div class="section-no">03 / 글과 안내</div>
+        <div>
+          <h2>처음 준비할<br>글과 안내 17건</h2>
+          <p class="section-intro">17건은 9월에 만들고 확인할 양입니다. 10월부터 매달 17건을 만든다는 뜻은 아닙니다. 자료를 받은 뒤 초안을 만들고, 확인받은 것만 공개 전 검토본으로 둡니다.</p>
+        </div>
+      </header>
+      <div class="count-hero">
+        <div class="count-big">
+          <div class="num">17<small>건</small></div>
+          <p>네이버 소식 · 카카오 안내 · 공간 소개 · 방문·예약 안내를 합친 9월에 만들고 확인할 양입니다.</p>
+        </div>
+        <div class="cpacks">
+          <article class="cpack">
+            <div class="cp-top"><span class="cp-let">가 · 네이버 소식</span><span class="cp-n">5</span></div>
+            <h4>찾아오게 하기</h4>
+            <ol>
+              <li><b>오각은 어떤 공간인가</b> — 오각과 다섯 공간 소개</li>
+              <li><b>선線 소개</b> — 성격·위치·현재 프로그램</li>
+              <li><b>향響 소개</b> — 성격·위치·현재 프로그램</li>
+              <li><b>처음 방문 전 확인</b> — 주소·이동·입장·예약</li>
+              <li><b>참여 가능한 프로그램</b> — 진행 중·예정 안내</li>
+            </ol>
+          </article>
+          <article class="cpack">
+            <div class="cp-top"><span class="cp-let">나 · 카카오 안내</span><span class="cp-n">5</span></div>
+            <h4>소식 잇기</h4>
+            <ol>
+              <li><b>채널 환영 안내</b> — 예약이 아닌 소식 구독 채널</li>
+              <li><b>다섯 감각의 시작</b> — 선·향·서·담·원 관계</li>
+              <li><b>새 프로그램 소식 틀</b> — 홈페이지 연결</li>
+              <li><b>방문 전 확인 틀</b> — 날짜·장소·예약 상태</li>
+              <li><b>구독 변경·철회 틀</b> — 확인받은 뒤 사용</li>
+            </ol>
+          </article>
+          <article class="cpack">
+            <div class="cp-top"><span class="cp-let">다 · 공간 소개</span><span class="cp-n">5</span></div>
+            <h4>다섯 공간</h4>
+            <ol>
+              <li><b>선線</b> — 철학·공간·현재/예정 프로그램</li>
+              <li><b>향響</b> — 철학·공간·현재/예정 프로그램</li>
+              <li><b>서書</b> — 철학·공간·현재/예정 프로그램</li>
+              <li><b>담談</b> — 철학·공간·현재/예정 프로그램</li>
+              <li><b>원原</b> — 철학·공간·현재/예정 프로그램</li>
+            </ol>
+          </article>
+          <article class="cpack">
+            <div class="cp-top"><span class="cp-let">라 · 방문·예약</span><span class="cp-n">2</span></div>
+            <h4>방문 안내</h4>
+            <ol>
+              <li><b>방문 안내</b> — 주소·교통·주차·출입·접근성</li>
+              <li><b>신청·예약 안내</b> — 홈페이지→외부 예약→변경·취소</li>
+            </ol>
+          </article>
+        </div>
+      </div>
+      <div class="formula" aria-label="17건 계산">
+        <span class="chip">네이버 소식 5</span><span class="op">+</span>
+        <span class="chip">카카오 안내 5</span><span class="op">+</span>
+        <span class="chip">공간 소개 5</span><span class="op">+</span>
+        <span class="chip">방문·예약 안내 2</span>
+        <span class="eq">= 총 <b>17건</b></span>
+      </div>
+    </section>
+
+    <!-- 04 MEASURE -->
+    <section class="section" id="measure">
+      <header class="section-head">
+        <div class="section-no">04 / 확인</div>
+        <div>
+          <h2>무엇을<br>확인할까요</h2>
+          <p class="section-intro">손님의 행동마다 다른 숫자로 셉니다. 저장·친구 수를 예약이나 방문 수로, 예약을 방문으로 합쳐서 보지 않습니다.</p>
+        </div>
+      </header>
+      <div class="measure" role="table" aria-label="확인 기준">
+        <div class="mrow head" role="row"><div role="columnheader">손님의 행동</div><div role="columnheader">세는 방법</div><div role="columnheader"><span class="verdict-pill">쓰임</span></div></div>
+        <div class="mrow" role="row"><div class="mstage">온라인 장소에서 들어옴</div><div class="munit">들어온 곳별 방문과 연결 누름</div><span class="verdict-pill vp-diag">어디서 찾아오는지</span></div>
+        <div class="mrow" role="row"><div class="mstage">프로그램에 관심을 보임</div><div class="munit">프로그램 설명을 본 횟수</div><span class="verdict-pill vp-diag">무엇을 보는지</span></div>
+        <div class="mrow" role="row"><div class="mstage">네이버에 저장함</div><div class="munit">네이버 플레이스 저장 수</div><span class="verdict-pill vp-rel">다시 찾아볼 가능성</span></div>
+        <div class="mrow" role="row"><div class="mstage">카카오 친구가 됨</div><div class="munit">카카오톡 채널 친구 수</div><span class="verdict-pill vp-rel">다시 소식 받을 가능성</span></div>
+        <div class="mrow" role="row"><div class="mstage">예약 서비스로 감</div><div class="munit">확인받은 외부 예약 연결을 누른 횟수</div><span class="verdict-pill vp-mid">예약으로 가는 과정</span></div>
+        <div class="mrow" role="row"><div class="mstage">예약을 마침</div><div class="munit">외부 예약 서비스에서 이름 없이 정리한 수</div><span class="verdict-pill vp-mid">예약 완료</span></div>
+        <div class="mrow" role="row"><div class="mstage">실제로 참여함</div><div class="munit">이름 없이 정리한 실제 방문·관람 완료 수</div><span class="verdict-pill vp-final">첫 90일 가장 중요한 결과</span></div>
+        <div class="mrow" role="row"><div class="mstage">다시 방문함</div><div class="munit">첫 방문 뒤 60일 안의 재방문과 연 3회 이상 방문</div><span class="verdict-pill vp-keep">꾸준히 찾는지</span></div>
+      </div>
+      <div class="caution">
+        <strong>합치지 않습니다</strong>
+        <span>예약 수와 방문 수를 하나로 합치지 않습니다. 네이버 저장·카카오 친구 수를 예약이나 방문 수로 보지 않습니다. 개인 소득·정확한 주소·가족관계·자녀의 정확한 나이는 받지 않습니다.</span>
+      </div>
+    </section>
+
+    <!-- 05 ROLES -->
+    <section class="section" id="roles">
+      <header class="section-head">
+        <div class="section-no">05 / 담당</div>
+        <div>
+          <h2>AI, 누가 어떤 일을<br>맡을까요</h2>
+          <p class="section-intro">AI Agent를 통해 오각에 특화된 팀으로 진행합니다. 운영 자동화뿐 아니라 고객 반응과 트렌드에 따라 24시간 빠르게 대응합니다.</p>
+        </div>
+      </header>
+      <div class="roles">
+        <article class="role">
+          <div class="role-badge" aria-hidden="true">희</div>
+          <div class="role-tag">브랜드 · 시장</div>
+          <h4>오각희</h4>
+          <div class="r-line"><b>9월</b>브랜드와 시장의 최신 정보를 모으고 제안서·글의 완료 기준을 정함</div>
+          <div class="r-line"><b>10월부터</b>시장 정보와 운영 결과를 함께 보고 판단</div>
+          <div class="r-bound">주의 · 공개할 글을 혼자 허락하지 않음</div>
+        </article>
+        <article class="role">
+          <div class="role-badge" aria-hidden="true">노</div>
+          <div class="role-tag">홈페이지 · 숫자</div>
+          <h4>오각노</h4>
+          <div class="r-line"><b>9월</b>홈페이지 연결과 숫자 셀 방법을 준비하고 화면 확인</div>
+          <div class="r-line"><b>10월부터</b>손님이 이동하는 길과 확인 방법 개선</div>
+          <div class="r-bound">주의 · 허락 전 배포·공개 글 변경 금지</div>
+        </article>
+        <article class="role next-b">
+          <div class="role-badge" aria-hidden="true">애</div>
+          <div class="role-tag">SNS · 카카오</div>
+          <h4>오각애</h4>
+          <div class="r-line"><b>9월</b>SNS·카카오에 쓸 글·이미지 초안과 반응 확인안 제작</div>
+          <div class="r-line"><b>10월부터</b>실제 반응에 따라 글과 이미지 시험</div>
+          <div class="r-bound">주의 · 허락 전 게시·댓글·DM 하지 않음</div>
+        </article>
+        <article class="role">
+          <div class="role-badge" aria-hidden="true">락</div>
+          <div class="role-tag">숫자 · 개인정보</div>
+          <h4>오각락</h4>
+          <div class="r-line"><b>9월</b>이름 없이 예약·방문·재방문 숫자를 정리할 기준 마련</div>
+          <div class="r-line"><b>10월부터</b>손님이 찾아와 다시 방문하기까지의 숫자를 자동 요약</div>
+          <div class="r-bound">주의 · 개인정보 원문 분석·사람별 정보 합치기 금지</div>
+        </article>
+      </div>
+      <div class="gov">
+        <div><b>조윤호</b> — 공개·계정·개인정보·예산 변경을 마지막으로 확인</div>
+      </div>
+    </section>
+
+    <footer>
+      <div>오각 온라인 홍보 준비 제안서 · 내부 검토용<br>원본 문서: <a href="ogak-initial-marketing-setup-proposal-2026-08.md">ogak-initial-marketing-setup-proposal-2026-08.md</a> v0.3.4</div>
+      <div>공개 게시·외부 전송·계정과 개인정보 설정 변경은 조윤호가 마지막으로 확인합니다<br>10월 1일은 오각향 오픈일입니다.</div>
+    </footer>
+  </main>
+
+  <div class="actions" aria-label="문서 동작">
+    <a class="btn secondary" href="#overview">처음부터 보기</a>
+    <button class="btn" type="button" onclick="window.print()">PDF로 인쇄</button>
+  </div>
+</body>
+</html>

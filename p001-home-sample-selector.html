@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>오각 P-001 검토용 시안 선택 — 시안 1·2·3·기타</title>
+<style>
+  :root { --line: #e3e0d8; --ink: #1a1a1a; --muted: #6b6b6b; --accent: #1a1a1a; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow-x: hidden; }
+  body {
+    display: flex; flex-direction: column; height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, sans-serif;
+    color: var(--ink); background: #fff;
+  }
+  header { flex: 0 0 auto; border-bottom: 1px solid var(--line); padding: 6px 16px 0; }
+  [role="tablist"] { display: flex; gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  [role="tab"] {
+    flex: 1 1 auto; min-width: 0; white-space: nowrap;
+    appearance: none; border: 0; background: transparent; cursor: pointer;
+    font: inherit; color: var(--muted);
+    padding: 8px; border-bottom: 2px solid transparent;
+    display: flex; flex-direction: column; align-items: center; gap: 1px;
+  }
+  [role="tab"] .lead { font-weight: 600; }
+  [role="tab"] .sub { font-size: 11px; font-weight: 400; color: var(--muted); }
+  [role="tab"][aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+  [role="tab"][aria-selected="true"] .sub { color: var(--accent); }
+  [role="tab"]:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .panels { flex: 1 1 auto; min-height: 0; position: relative; }
+  [role="tabpanel"] { position: absolute; inset: 0; }
+  [role="tabpanel"][hidden] { display: none; }
+  iframe { display: block; width: 100%; height: 100%; border: 0; }
+</style>
+</head>
+<body>
+<header>
+  <div role="tablist" aria-label="시안 샘플 선택">
+    <button role="tab" id="tab-1" aria-controls="panel-1" aria-selected="true"><span class="lead">시안 1</span><span class="sub">이미지 패널</span></button>
+    <button role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1"><span class="lead">시안 2</span><span class="sub">검은 유리</span></button>
+    <button role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" tabindex="-1"><span class="lead">시안 3</span><span class="sub">화이트</span></button>
+    <button role="tab" id="tab-other" aria-controls="panel-other" aria-selected="false" tabindex="-1"><span class="lead">기타</span><span class="sub">오각 소개</span></button>
+  </div>
+</header>
+
+<div class="panels">
+  <div role="tabpanel" id="panel-1" aria-labelledby="tab-1" tabindex="0">
+    <iframe title="화이트 패널형 다섯 공간 — 오각 P-001 검토용 시안 D" src="p001-home-variant-d-dtc-panels.html" loading="eager"></iframe>
+  </div>
+  <div role="tabpanel" id="panel-2" aria-labelledby="tab-2" tabindex="0" hidden>
+    <iframe title="검은 유리와 잔광 — 오각 P-001 검토용 시안 A" src="p001-home-variant-a-smoked-glass.html" loading="lazy"></iframe>
+  </div>
+  <div role="tabpanel" id="panel-3" aria-labelledby="tab-3" tabindex="0" hidden>
+    <iframe title="백색 갤러리와 색면 — 오각 P-001 검토용 시안 B" src="p001-home-variant-b-white-gallery.html" loading="lazy"></iframe>
+  </div>
+  <div role="tabpanel" id="panel-other" aria-labelledby="tab-other" tabindex="0" hidden>
+    <iframe title="다섯 공간을 지나는 빛의 기록 — 오각 소개 검토용 시안 E" src="p001-home-variant-e-kage-scroll.html" loading="lazy"></iframe>
+  </div>
+</div>
+
+<script>
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  var keys = ["1", "2", "3", "other"];
+
+  function select(key, focus) {
+    if (keys.indexOf(key) < 0) key = "1";
+    tabs.forEach(function (tab) {
+      var k = tab.id.replace("tab-", "");
+      var on = k === key;
+      tab.setAttribute("aria-selected", on ? "true" : "false");
+      tab.tabIndex = on ? 0 : -1;
+      document.getElementById("panel-" + k).hidden = !on;
+      if (on && focus) tab.focus();
+    });
+    if (("#" + key) !== location.hash) {
+      history.replaceState(null, "", "#" + key);
+    }
+  }
+
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener("click", function () { select(tab.id.replace("tab-", ""), false); });
+    tab.addEventListener("keydown", function (e) {
+      var next = null;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") next = (i + 1) % tabs.length;
+      else if (e.key === "ArrowLeft" || e.key === "ArrowUp") next = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === "Home") next = 0;
+      else if (e.key === "End") next = tabs.length - 1;
+      if (next === null) return;
+      e.preventDefault();
+      select(tabs[next].id.replace("tab-", ""), true);
+    });
+  });
+
+  window.addEventListener("hashchange", function () {
+    select(location.hash.replace("#", ""), false);
+  });
+
+  select(location.hash.replace("#", ""), false);
+</script>
+</body>
+</html>

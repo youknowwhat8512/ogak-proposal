@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>화이트 패널형 다섯 공간 — 오각 P-001 검토용 시안 D</title>
+  <style>
+    :root{--ink:#111;--paper:#fff;--line:rgba(0,0,0,.24);--header:74px;--ease:cubic-bezier(.22,.61,.36,1);--font:"Pretendard GOV Variable",sans-serif}
+    *{box-sizing:border-box}html{background:#fff;scroll-behavior:smooth}body{margin:0;background:#fff;color:#111;font-family:var(--font);overflow-x:hidden}button,a{font:inherit}.skip{position:fixed;left:12px;top:-80px;z-index:100;background:#111;color:#fff;padding:12px}.skip:focus{top:12px}
+    .site-header{height:var(--header);display:flex;align-items:center;gap:30px;padding:0 clamp(20px,3.2vw,54px);border-bottom:1px solid rgba(0,0,0,.18);background:#fff;position:relative;z-index:20}.brand{display:flex;align-items:center;gap:13px;margin-right:auto;color:#111;text-decoration:none}.brand img{width:48px;height:48px;object-fit:contain;filter:invert(1)}.brand-copy{display:grid;gap:1px}.brand-copy strong{font-size:18px;letter-spacing:.08em}.brand-copy span{font-size:9px;letter-spacing:.28em;color:#696965}.nav{display:flex;gap:28px}.nav a{color:#111;text-decoration:none;font-size:14px;font-weight:650}.social-links{display:flex;align-items:center;gap:10px}.social-icon{width:28px;height:28px;display:grid;place-items:center;color:#111}.social-icon svg{width:24px;height:24px;display:block}.menu{display:none;background:#fff;border:1px solid #111;color:#111;width:42px;height:42px}
+    .hero{height:calc(100vh - var(--header));min-height:700px;position:relative}.panels{height:100%;display:flex;overflow:hidden;background:#fff}.panel{position:relative;min-width:0;flex:1 1 0;overflow:hidden;border-right:1px solid rgba(0,0,0,.48);transition:flex .42s var(--ease)}.panel:last-child{border-right:0}.panel.is-open{flex:8 1 0}.panel-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:none;transition:filter .42s var(--ease),transform .7s var(--ease)}.panel.is-open .panel-media{filter:none;transform:scale(1.015)}.panel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(0,0,0,.04) 38%,rgba(0,0,0,.72));pointer-events:none}.panel:not(.is-open)::after{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.56))}
+    .panel-head{position:absolute;inset:0;z-index:2;width:100%;border:0;background:transparent;color:#fff;cursor:pointer;text-align:left;padding:0}.panel-head:focus-visible{outline:3px solid currentColor;outline-offset:-5px}.tab-label{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);display:grid;justify-items:center;gap:12px;white-space:nowrap}.tab-label b{font-family:var(--font);font-size:clamp(24px,2.4vw,42px);font-weight:600}.tab-label small{font-size:11px;letter-spacing:.2em;color:#e4e4e1}.folded-copy{display:none}.panel.is-open .tab-label{opacity:0;pointer-events:none}
+    .panel-body{position:absolute;inset:0;z-index:3;pointer-events:none;display:flex;align-items:flex-end;padding:clamp(28px,4vw,72px);padding-bottom:clamp(60px,7vw,100px);color:#fff}.panel-body[hidden]{display:none}.panel-copy{max-width:700px;pointer-events:auto;text-shadow:0 2px 20px rgba(0,0,0,.72)}.kicker{font-size:11px;letter-spacing:.22em;margin:0 0 18px;color:#eee}.space-name{font-family:var(--font);font-size:clamp(76px,9vw,148px);font-weight:650;line-height:.82;margin:0 0 22px;letter-spacing:-.05em}.space-name span{font-family:inherit;font-size:.28em;margin-left:.2em;opacity:.72}.space-role{font-size:17px;line-height:1.7;margin:0 0 24px;max-width:520px}.space-action{background:transparent;color:#fff;border:0;border-bottom:1px solid rgba(255,255,255,.82);padding:10px 0;cursor:pointer}.space-action:focus-visible{outline:2px solid #fff;outline-offset:5px}
+
+    .archive{width:100%;background:#fff;color:#111;padding:clamp(70px,8vw,122px) clamp(20px,5vw,76px) 110px;border-top:1px solid rgba(0,0,0,.18)}.archive-head{width:100%;margin:0 0 58px;display:grid;grid-template-columns:1fr 1fr;align-items:end;border-bottom:1px solid #111;padding-bottom:24px}.archive-head p{margin:0;font-size:12px;letter-spacing:.18em}.archive-head h2{margin:0;font-family:var(--font);font-size:clamp(38px,4vw,66px);font-weight:600;line-height:1.1}.event-group{width:100%;margin:0 0 90px}.event-group:last-child{margin-bottom:0}.group-title{display:flex;align-items:baseline;gap:16px;margin:0 0 22px}.group-title h3{margin:0;font-size:22px}.group-title span{font-size:11px;letter-spacing:.17em;color:#666}.event-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,34px)}.event-grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.event{margin:0}.poster{aspect-ratio:3/4;background:#f3f3f1;border:1px solid rgba(0,0,0,.18);display:grid;place-items:center;overflow:hidden}.poster img{width:100%;height:100%;object-fit:contain;display:block}.event figcaption{display:flex;justify-content:space-between;gap:20px;border-top:1px solid #111;padding-top:12px;margin-top:12px;font-size:12px}.event figcaption span:last-child{color:#666}
+    .candidate-note{background:#fff;color:#666;border-top:1px solid rgba(0,0,0,.18);padding:22px clamp(20px,5vw,76px);font-size:11px;line-height:1.7}
+    .exhibition-archive{padding:0;background:#fff;color:#111}
+    .exhibition-head{display:flex;align-items:end;justify-content:space-between;gap:28px;width:100%;margin:0;padding:clamp(52px,6vw,88px) clamp(24px,3.2vw,56px) 32px;border-bottom:1px solid #111}
+    .exhibition-head p{margin:0 0 10px;font-size:11px;letter-spacing:.18em;color:#666}
+    .exhibition-head h2{margin:0;font-size:clamp(32px,3.5vw,54px);font-weight:650;line-height:1.08;letter-spacing:-.04em}
+    .exhibition-head span{font-size:12px;color:#666;white-space:nowrap}
+    .exhibition-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:100%;border-bottom:1px solid #111}
+    .exhibition-card{min-width:0;padding:38px clamp(18px,3vw,58px) 42px;border-right:1px solid #111}
+    .exhibition-card:last-child{border-right:0}
+    .exhibition-state{display:inline-flex;align-items:center;min-height:32px;padding:5px 9px;border:1px solid #111;font-size:11px;line-height:1;letter-spacing:-.01em}
+    .exhibition-state.current{background:#111;color:#fff}
+    .exhibition-poster{width:100%;aspect-ratio:3/4;margin:34px 0 0;overflow:hidden;background:#f3f3f1}
+    .exhibition-poster img{display:block;width:100%;height:100%;object-fit:contain;filter:none}
+    .exhibition-card h3{margin:36px 0 0;font-size:clamp(19px,1.45vw,27px);font-weight:700;line-height:1.4;letter-spacing:-.04em;word-break:keep-all}
+    .exhibition-date{margin:26px 0 0;font-size:13px;line-height:1.6;color:#666;font-variant-numeric:tabular-nums}
+    .exhibition-place{margin:13px 0 0;font-size:12px;line-height:1.6;color:#666}
+    .art-banners{width:100%;padding:clamp(64px,7vw,108px) 0 clamp(82px,9vw,136px);background:#f4f4f1;color:#111;border-top:1px solid #111}
+    .art-banners-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin:0 0 32px;padding-inline:clamp(24px,3.2vw,56px)}.art-banners-head p{margin:0 0 10px;font-size:11px;letter-spacing:.18em;color:#666}.art-banners-head h2{margin:0;font-size:clamp(32px,3.5vw,54px);font-weight:650;line-height:1.08;letter-spacing:-.04em}.art-banners-head>span{max-width:420px;font-size:13px;line-height:1.7;color:#666;text-align:right}
+    .art-banner-list{display:grid;gap:18px}
+    .art-banner{position:relative;isolation:isolate;width:100%;height:134px;display:grid;grid-template-columns:minmax(300px,1.15fr) minmax(460px,1fr);align-items:center;overflow:hidden;border-block:1px solid #111}
+    .art-banner::before,.art-banner::after{content:"";position:absolute;pointer-events:none}
+    .art-copy{position:relative;z-index:4;display:flex;align-items:baseline;gap:24px;padding:22px clamp(28px,4vw,70px)}
+    .art-copy h3{margin:0;font-size:clamp(30px,3vw,48px);font-weight:700;line-height:1;letter-spacing:-.045em;white-space:nowrap}
+    .art-copy p{margin:0;max-width:330px;font-size:13px;line-height:1.7}
+    .art-links{position:relative;z-index:4;display:flex;align-items:center;justify-content:flex-end;gap:clamp(18px,2.6vw,44px);padding:22px clamp(28px,4vw,70px)}
+    .art-links a{color:inherit;text-decoration:none;font-size:clamp(15px,1.35vw,21px);font-weight:700;white-space:nowrap}
+    .art-links a::after{content:"↗";margin-left:9px;font-size:.8em}
+    .art-variant-label{position:absolute;z-index:6;top:10px;right:17px;font-size:10px;font-weight:700;letter-spacing:.16em}
+
+    .art-banner.overlap{background:#090b0c;color:#fff;border-color:#090b0c}
+    .art-banner.overlap::before{inset:-50% 23% -55% 18%;background:linear-gradient(102deg,rgba(0,168,72,.48),rgba(48,120,216,.44) 34%,rgba(185,24,141,.34) 63%,rgba(168,168,24,.16));transform:rotate(13deg);filter:blur(1px);box-shadow:0 0 44px rgba(48,120,216,.18)}
+    .art-banner.overlap::after{inset:0;background:linear-gradient(90deg,#090b0c 0 19%,transparent 38% 68%,#090b0c 92%),repeating-linear-gradient(90deg,transparent 0 15.8%,rgba(255,255,255,.2) 15.8% 16%);z-index:1}
+    .art-banner.overlap .art-copy p{color:#d5d5d1}.art-banner.overlap .art-variant-label{color:#ccc}
+    .art-banner.reflection{background:#11182a;color:#fff;border-color:#11182a}
+    .art-banner.reflection::before{width:55%;height:360%;left:29%;top:-132%;background:linear-gradient(105deg,transparent 7%,rgba(0,168,72,.24) 24%,rgba(85,218,217,.38) 37%,rgba(48,120,216,.24) 53%,rgba(185,24,141,.34) 66%,rgba(168,168,24,.16) 75%,transparent 88%);transform:rotate(28deg);filter:blur(10px)}
+    .art-banner.reflection::after{inset:0;background:radial-gradient(ellipse at 64% 48%,rgba(255,255,255,.15),transparent 22%),linear-gradient(90deg,rgba(0,0,0,.85),transparent 37% 72%,rgba(4,7,15,.58));z-index:1}
+    .art-banner.reflection .art-copy p{color:#d9dde6}.art-banner.reflection .art-links{border-left:1px solid rgba(255,255,255,.22)}.art-banner.reflection .art-variant-label{color:#bfc6d3}
+
+    @media(max-width:1180px){.exhibition-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.exhibition-card:nth-child(3){border-right:0}.exhibition-card:nth-child(n+4){border-top:1px solid #111}.exhibition-card:last-child{border-right:1px solid #111}}
+    @media(min-width:761px){
+      .panels{gap:0;padding:0}
+      .panel:not(.is-open){flex:0 0 5.5556%}
+      .panel.is-open{flex:1 1 auto}
+      .panel.is-open .panel-media{inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%}
+      .panel:not(.is-open){background:#fff}
+      .panel:not(.is-open)::after{display:none}
+      .panel:not(.is-open) .panel-media{z-index:1;inset:auto 12px 18px;width:calc(100% - 24px);height:92px;object-fit:cover;object-position:center;transform:none;border:1px solid rgba(0,0,0,.34);background:#f2f2ef}
+      .panel:not(.is-open) .panel-head{color:#111}
+      .panel:not(.is-open) .tab-label{inset:24px 0 126px;transform:none;display:flex;justify-content:center;align-items:center;white-space:normal}
+      .panel:not(.is-open) .tab-label b,.panel:not(.is-open) .tab-label small{display:none}
+      .panel:not(.is-open) .folded-copy{display:block;writing-mode:vertical-rl;text-orientation:mixed;font-size:13px;font-weight:650;line-height:1.45;letter-spacing:-.01em;max-height:100%;overflow:hidden}
+    }
+    @media(max-width:760px){:root{--header:64px}.site-header{padding:0 15px;gap:12px}.brand img{width:40px;height:40px}.brand-copy strong{font-size:15px}.brand-copy span{display:none}.nav{display:none}.social-links{gap:6px}.social-icon{width:24px;height:24px}.social-icon svg{width:22px;height:22px}.menu{display:block}.hero{height:780px;min-height:0}.panels{overflow-x:auto;overflow-y:hidden;gap:12px;padding:0 16px;scroll-snap-type:x mandatory;scroll-padding-inline:16px;overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}.panels::-webkit-scrollbar{display:none}.panel,.panel.is-open{flex:0 0 calc(100vw - 32px);height:100%;scroll-snap-align:start;border-right:0;transition:none}.panel:not(.is-open)::after{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.62))}.panel:not(.is-open) .panel-media{filter:none}.panel-head{pointer-events:auto}.tab-label{left:24px;bottom:28px;transform:none;justify-items:start}.panel.is-open .tab-label{opacity:0}.panel-body{padding:28px 24px 54px}.space-name{font-size:82px}.space-role{font-size:14px;max-width:300px}.archive{padding:64px 16px 80px}.archive-head{display:block;margin-bottom:40px}.archive-head p{margin-bottom:14px}.archive-head h2{font-size:40px}.event-group{margin-bottom:64px}.event-grid,.event-grid.two{grid-template-columns:1fr 1fr;gap:22px 12px}.event figcaption{display:block;line-height:1.6}.poster{aspect-ratio:3/4}}
+    @media(max-width:760px){.exhibition-archive{padding:0}.exhibition-head{align-items:start;padding:48px 18px 24px}.exhibition-head span{display:none}.exhibition-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.exhibition-card{padding:28px 16px 34px}.exhibition-card:nth-child(odd){border-right:1px solid #111}.exhibition-card:nth-child(even){border-right:0}.exhibition-card:nth-child(n+3){border-top:1px solid #111}.exhibition-poster{margin-top:26px}.exhibition-card h3{margin-top:26px;font-size:20px}.exhibition-date{margin-top:18px}}
+    @media(max-width:900px){.art-banners{padding:58px 0 80px}.art-banners-head{align-items:start;padding-inline:18px}.art-banners-head>span{max-width:300px}.art-banner{height:auto;min-height:300px;grid-template-columns:1fr;align-content:space-between}.art-copy{display:block;padding:48px 28px 18px}.art-copy p{margin-top:14px}.art-links{justify-content:flex-start;padding:20px 28px 42px;flex-wrap:wrap}.art-banner.reflection .art-links{border-left:0;border-top:1px solid rgba(255,255,255,.22)}.art-banner.overlap::before{inset:-30% 2% -30% 28%}.art-banner.reflection::before{left:40%;width:72%}}
+    @media(max-width:560px){.art-banners-head{display:block}.art-banners-head>span{display:block;margin-top:14px;text-align:left}.art-banner{min-height:340px}.art-copy h3{font-size:34px}.art-links{display:grid;grid-template-columns:1fr 1fr;gap:14px}.art-links a{font-size:15px}}
+    @media(max-width:480px){.exhibition-grid{grid-template-columns:1fr}.exhibition-card,.exhibition-card:nth-child(odd),.exhibition-card:last-child{border-right:0}.exhibition-card:nth-child(n+2){border-top:1px solid #111}}
+    @media(max-width:430px){.event-grid,.event-grid.two{grid-template-columns:1fr}.poster{max-height:none}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.panel,.panel-media{transition:none!important}}
+  </style>
+</head>
+<body>
+<a class="skip" href="#spaces">본문으로 바로가기</a>
+<header class="site-header">
+  <a class="brand" href="#" aria-label="오각 홈"><img src="assets/p001-dtc/logo-ogak.png" alt=""><span class="brand-copy"><strong>오각</strong><span>OGAK</span></span></a>
+  <nav class="nav" aria-label="주요 메뉴"><a href="#archive">프로그램</a><a href="#spaces">공간</a><a href="#">방문 안내</a><a href="#archive">지난 프로그램</a><a href="p001-home-variant-e-kage-scroll.html">오각 소개</a></nav>
+  <div class="social-links" aria-label="소셜 채널 · 링크 준비 중">
+    <span class="social-icon" role="img" aria-label="인스타그램"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.8" r="1.15" fill="currentColor"/></svg></span>
+    <span class="social-icon" role="img" aria-label="카카오"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.2c-5 0-9 3.1-9 7 0 2.5 1.6 4.6 4.1 5.9l-.8 3.1 3.6-2.1c.7.1 1.4.2 2.1.2 5 0 9-3.1 9-7s-4-6.9-9-6.9Z" fill="currentColor"/><circle cx="9" cy="11.2" r=".8" fill="#fff"/><circle cx="12" cy="11.2" r=".8" fill="#fff"/><circle cx="15" cy="11.2" r=".8" fill="#fff"/></svg></span>
+    <span class="social-icon" role="img" aria-label="네이버"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1.5" fill="currentColor"/><path d="M7.3 7h3.2l3 4.5V7h3.2v10h-3.2l-3-4.5V17H7.3V7Z" fill="#fff"/></svg></span>
+  </div>
+  <button class="menu" type="button" aria-label="메뉴 열기">☰</button>
+</header>
+<main>
+<section class="hero" id="spaces" aria-label="오각의 다섯 공간">
+  <p id="space-live" class="skip" aria-live="polite">선, 5개 공간 중 1번째, 자동 전환 중</p>
+  <div class="panels" id="panels">
+    <article class="panel is-open" data-space="선"><img class="panel-media representative-event" src="assets/p001-dtc/seon-event-3.png" data-default-src="assets/p001-dtc/space-seon.png" alt="선에서 진행 중인 전시 포스터: 김중만 빛과 생명의 기록" width="562" height="748" onerror="this.onerror=null;this.src=this.dataset.defaultSrc;this.alt='천의 움직임으로 표현한 선 공간 컨셉 이미지'"><button class="panel-head" type="button" aria-expanded="true" aria-controls="space-seon" aria-label="선 공간, 펼쳐짐"><span class="tab-label"><b>선</b><small>線</small><span class="folded-copy">선 · 진행 중인 전시 · 김중만: 빛과 생명의 기록</span></span></button><div class="panel-body" id="space-seon"><div class="panel-copy"><p class="kicker">선 · 진행 중인 전시</p><h1 class="space-name">선 <span>線</span></h1><p class="space-role">현재 선에서 진행 중인 전시를 대표 이미지로 보여줍니다.</p><button class="space-action" type="button">선 공간 보기 →</button></div></div></article>
+    <article class="panel" data-space="향"><img class="panel-media representative-event" src="assets/p001-dtc/hyang-event-2.png" data-default-src="assets/p001-dtc/space-hyang.png" alt="향에서 가장 최근에 열린 강연 포스터: 현대미술의 흐름을 만나는 시간" width="746" height="750" onerror="this.onerror=null;this.src=this.dataset.defaultSrc;this.alt='손과 재료로 표현한 향 공간 컨셉 이미지'"><button class="panel-head" type="button" aria-expanded="false" aria-controls="space-hyang" aria-label="향 공간, 접힘"><span class="tab-label"><b>향</b><small>響</small><span class="folded-copy">향 · 최근 지난 행사 · 현대미술의 흐름을 만나는 시간</span></span></button><div class="panel-body" id="space-hyang" hidden><div class="panel-copy"><p class="kicker">향 · 최근 지난 행사</p><h2 class="space-name">향 <span>響</span></h2><p class="space-role">향에서 가장 최근에 열린 행사의 기록을 대표 이미지로 보여줍니다.</p><button class="space-action" type="button">향 공간 보기 →</button></div></div></article>
+    <article class="panel" data-space="서"><img class="panel-media" src="assets/p001-dtc/space-seo.png" alt="결이 있는 표면으로 표현한 서 공간 컨셉 이미지" width="561" height="754"><button class="panel-head" type="button" aria-expanded="false" aria-controls="space-seo" aria-label="서 공간, 접힘"><span class="tab-label"><b>서</b><small>書</small><span class="folded-copy">서 · 프로그램 정보 준비 중</span></span></button><div class="panel-body" id="space-seo" hidden><div class="panel-copy"><p class="kicker">오각 · 다섯 공간 · 03</p><h2 class="space-name">서 <span>書</span></h2><p class="space-role">공간 소개와 프로그램 정보는 확인 후 공개합니다.</p><button class="space-action" type="button">서 공간 보기 →</button></div></div></article>
+    <article class="panel" data-space="담"><img class="panel-media" src="assets/p001-dtc/space-dam.png" alt="겹쳐진 책으로 표현한 담 공간 컨셉 이미지" width="562" height="749"><button class="panel-head" type="button" aria-expanded="false" aria-controls="space-dam" aria-label="담 공간, 접힘"><span class="tab-label"><b>담</b><small>談</small><span class="folded-copy">담 · 프로그램 정보 준비 중</span></span></button><div class="panel-body" id="space-dam" hidden><div class="panel-copy"><p class="kicker">오각 · 다섯 공간 · 04</p><h2 class="space-name">담 <span>談</span></h2><p class="space-role">공간 소개와 프로그램 정보는 확인 후 공개합니다.</p><button class="space-action" type="button">담 공간 보기 →</button></div></div></article>
+    <article class="panel" data-space="원"><img class="panel-media" src="assets/p001-dtc/space-won.png" alt="도자 표면으로 표현한 원 공간 컨셉 이미지" width="557" height="754"><button class="panel-head" type="button" aria-expanded="false" aria-controls="space-won" aria-label="원 공간, 접힘"><span class="tab-label"><b>원</b><small>原</small><span class="folded-copy">원 · 프로그램 정보 준비 중</span></span></button><div class="panel-body" id="space-won" hidden><div class="panel-copy"><p class="kicker">오각 · 다섯 공간 · 05</p><h2 class="space-name">원 <span>原</span></h2><p class="space-role">공간 소개와 프로그램 정보는 확인 후 공개합니다.</p><button class="space-action" type="button">원 공간 보기 →</button></div></div></article>
+  </div>
+</section>
+<section class="archive exhibition-archive" id="archive" aria-labelledby="exhibition-title">
+  <header class="exhibition-head"><div><p>전시와 프로그램</p><h2 id="exhibition-title">공간에서 열린 기록</h2></div><span>현재 전시와 지난 기록 · 최신순</span></header>
+  <div class="exhibition-grid">
+    <article class="exhibition-card"><span class="exhibition-state current">현재 전시</span><figure class="exhibition-poster"><img src="assets/p001-dtc/seon-event-3.png" alt="김중만: 빛과 생명의 기록 전시 포스터" width="562" height="748" loading="lazy" decoding="async"></figure><h3>김중만: 빛과 생명의 기록</h3><p class="exhibition-date">2026.07.28–09.23</p><p class="exhibition-place">오각 선 · 과천펜타원 A동 B1</p></article>
+    <article class="exhibition-card"><span class="exhibition-state">지난 강연</span><figure class="exhibition-poster"><img src="assets/p001-dtc/hyang-event-2.png" alt="현대미술의 흐름을 만나는 시간 강연 포스터" width="746" height="750" loading="lazy" decoding="async"></figure><h3>현대미술의 흐름을 만나는 시간</h3><p class="exhibition-date">2026.06.24 · 오전 11:00</p><p class="exhibition-place">오각 향</p></article>
+    <article class="exhibition-card"><span class="exhibition-state">지난 토크</span><figure class="exhibition-poster"><img src="assets/p001-dtc/hyang-event-1.png" alt="권기수 색의 질서 Golden Age 아티스트 토크 포스터" width="626" height="754" loading="lazy" decoding="async"></figure><h3>권기수 《색의 질서 Golden Age》 아티스트 토크</h3><p class="exhibition-date">2026.05.21 · 12:30–13:30</p><p class="exhibition-place">오각 향</p></article>
+    <article class="exhibition-card"><span class="exhibition-state">지난 전시</span><figure class="exhibition-poster"><img src="assets/p001-dtc/seon-event-1.png" alt="오각 선 개관전 컬렉터의 선반 포스터" width="602" height="752" loading="lazy" decoding="async"></figure><h3>오각 선 개관전 《컬렉터의 선반》</h3><p class="exhibition-date">2025.11.01–2026.01.31</p><p class="exhibition-place">오각 선</p></article>
+    <article class="exhibition-card"><span class="exhibition-state">지난 공연</span><figure class="exhibition-poster"><img src="assets/p001-dtc/seon-event-2.png" alt="현대미술가 안은미 5=1굿 오프닝 공연 포스터" width="600" height="757" loading="lazy" decoding="async"></figure><h3>현대미술가 안은미 5=1굿</h3><p class="exhibition-date">2025.10.31</p><p class="exhibition-place">오각 선</p></article>
+  </div>
+</section>
+<section class="art-banners" id="art-banners" aria-labelledby="art-banners-title">
+  <header class="art-banners-head"><div><p>건물 외관색 기반 아트 배너</p><h2 id="art-banners-title">중첩과 반사</h2></div><span>색유리의 선명한 중첩과 부드러운 반사광을 이어서 보여줍니다.</span></header>
+  <div class="art-banner-list">
+    <article class="art-banner overlap" aria-labelledby="art-banner-b"><span class="art-variant-label">중첩</span><div class="art-copy"><h3 id="art-banner-b">오각의 다섯 공간</h3><p>각기 다른 감각과 활동이 한 건물 안에서 이어집니다.</p></div><nav class="art-links" aria-label="중첩 배너 공간 바로가기"><a href="#spaces">선</a><a href="#spaces">향</a><a href="#spaces">서</a><a href="#spaces">담</a><a href="#spaces">원</a></nav></article>
+    <article class="art-banner reflection" aria-labelledby="art-banner-c"><span class="art-variant-label">반사</span><div class="art-copy"><h3 id="art-banner-c">오각의 다섯 공간</h3><p>각기 다른 감각과 활동이 한 건물 안에서 이어집니다.</p></div><nav class="art-links" aria-label="반사 배너 공간 바로가기"><a href="#spaces">선</a><a href="#spaces">향</a><a href="#spaces">서</a><a href="#spaces">담</a><a href="#spaces">원</a></nav></article>
+  </div>
+</section>
+</main>
+<footer class="candidate-note">P-001 검토용 디자인 시안 · DTC 아트센터의 다섯 패널 인터랙션 원리만 참고했으며, 오각의 실제 로고와 제공 이미지를 사용했습니다.</footer>
+<script>
+(()=>{
+ const panels=[...document.querySelectorAll('.panel')], heads=panels.map(p=>p.querySelector('.panel-head')), scroller=document.querySelector('#panels');
+ const live=document.querySelector('#space-live');
+ const reduce=matchMedia('(prefers-reduced-motion: reduce)'), mobile=matchMedia('(max-width: 760px)');
+ let active=0, timer=0, userStopped=false, inView=true, scrollTimer=0;
+ function canRotate(){return !mobile.matches&&!reduce.matches&&!document.hidden&&inView&&!userStopped}
+ function status(){
+   const text=mobile.matches?'터치로 탐색':canRotate()?'자동 전환 중':userStopped?'자동 전환 멈춤':reduce.matches?'동작 줄이기 설정':'자동 전환 대기';
+   live.textContent=`${panels[active].dataset.space}, 5개 공간 중 ${active+1}번째, ${text}`;
+ }
+ function schedule(){clearTimeout(timer);status();if(canRotate())timer=setTimeout(()=>open((active+1)%panels.length,'auto'),5000)}
+ function open(i,source){
+   active=(i+panels.length)%panels.length;
+   panels.forEach((p,n)=>{const on=n===active;p.classList.toggle('is-open',on);heads[n].setAttribute('aria-expanded',String(on));heads[n].setAttribute('aria-label',`${p.dataset.space} 공간, ${on?'펼쳐짐':'접힘'}`);p.querySelector('.panel-body').hidden=!on});
+   if(source==='user'||source==='key'||source==='scroll')userStopped=true;
+   if(mobile.matches&&source!=='scroll')panels[active].scrollIntoView({behavior:reduce.matches?'auto':'smooth',inline:'start',block:'nearest'});
+   schedule();
+ }
+ heads.forEach((h,i)=>{
+   h.addEventListener('click',()=>{if(i!==active)open(i,'user');else{userStopped=true;schedule()}});
+   h.addEventListener('keydown',e=>{let n=null;if(['ArrowRight','ArrowDown'].includes(e.key))n=(i+1)%5;if(['ArrowLeft','ArrowUp'].includes(e.key))n=(i+4)%5;if(e.key==='Home')n=0;if(e.key==='End')n=4;if(n!==null){e.preventDefault();open(n,'key');heads[n].focus()}})
+ });
+ document.querySelectorAll('.space-action').forEach(b=>b.addEventListener('click',()=>{userStopped=true;schedule()}));
+
+ scroller.addEventListener('pointerdown',()=>{if(mobile.matches){userStopped=true;schedule()}},{passive:true});
+ scroller.addEventListener('scroll',()=>{if(!mobile.matches)return;clearTimeout(scrollTimer);scrollTimer=setTimeout(()=>{const left=scroller.getBoundingClientRect().left;let best=0,dist=Infinity;panels.forEach((p,i)=>{const d=Math.abs(p.getBoundingClientRect().left-left-16);if(d<dist){dist=d;best=i}});if(best!==active)open(best,'scroll');else status()},100)},{passive:true});
+ document.addEventListener('visibilitychange',schedule);reduce.addEventListener?.('change',schedule);mobile.addEventListener?.('change',()=>{if(!mobile.matches)scroller.scrollLeft=0;schedule()});
+ new IntersectionObserver(([e])=>{inView=e.isIntersecting;schedule()},{threshold:.25}).observe(document.querySelector('.hero'));
+ open(0,'init');
+})();
+</script>
+</body>
+</html>
