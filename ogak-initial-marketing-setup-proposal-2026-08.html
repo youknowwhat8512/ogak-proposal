@@ -111,6 +111,8 @@
     .ch-example-body{padding:0 24px 24px}
     .ch-example-body img{display:block;width:100%;max-width:760px;height:auto;margin:0 auto;border:1px solid var(--line);border-radius:14px}
     .ch-example-cap{font-size:12.5px;color:var(--muted);max-width:760px;margin:12px auto 0;text-align:center}
+    .ch-example-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:760px;margin:0 auto}
+    .ch-example-gallery img{width:100%;max-width:100%;height:auto;margin:0;border:1px solid var(--line);border-radius:14px;display:block}
 
     /* FUNNEL */
     .funnel-groups{display:grid;grid-template-columns:2fr 2fr 2fr;gap:14px;margin-bottom:14px}
@@ -213,6 +215,7 @@
       .baseline .pin{writing-mode:horizontal-tb;top:50%;transform:translateY(-50%)}
       .lane li{grid-template-columns:80px 1fr;gap:12px}
       .channels{grid-template-columns:1fr}.ch{min-height:auto}
+      .ch-example-gallery{grid-template-columns:1fr}
       .funnel-groups{grid-template-columns:1fr}.fg{border-radius:14px}
       .funnel{grid-template-columns:1fr}.fstep{min-height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:6px 12px}
       .fstep h4{flex:1}.fstep p{flex-basis:100%}.fstep .kind{margin:0}.fstep .opt{position:static}
@@ -241,7 +244,7 @@
     <section class="hero" aria-labelledby="doc-title">
       <div class="brand">
         <div class="ogak-lockup"><span class="mark">五角</span><span>OGAK</span></div>
-        <div class="meta">온라인 홍보 준비 제안서<br>v0.3.4 · 2026.08.18</div>
+        <div class="meta">온라인 홍보 준비 제안서<br>v0.3.5 · 2026.08.18</div>
       </div>
       <div class="hero-copy">
         <div class="eyebrow">오각 온라인 홍보 준비 제안서</div>
@@ -356,6 +359,17 @@
         <div class="ch-example-body">
           <img src="assets/proposal/google-search-result-example.png" alt="구글 검색 결과에서 홈페이지 대표 제목 아래에 ARTISTS·ABOUT·TOURS·CONCERTS 같은 주요 메뉴 링크가 함께 표시된 예시">
           <p class="ch-example-cap">구글 검색 결과에 홈페이지의 주요 메뉴가 함께 보이는 예시입니다. 실제 표시는 구글이 정하므로 같은 모양을 보장할 수 없습니다.</p>
+        </div>
+      </details>
+      <details class="ch-example">
+        <summary>카카오 채널 구성 예시 보기</summary>
+        <div class="ch-example-body">
+          <div class="ch-example-gallery">
+            <img src="assets/proposal/kakao-channel-example-1.png" alt="카카오 채널 프로필·친구 추가 화면">
+            <img src="assets/proposal/kakao-channel-example-2.png" alt="카카오 프로그램/예약 상품 목록 예시">
+            <img src="assets/proposal/kakao-channel-example-3.png" alt="프로그램 상세·채널 추가·예약 화면 예시">
+          </div>
+          <p class="ch-example-cap">카카오 채널의 프로필·콘텐츠·프로그램 안내가 보이는 예시입니다. 화면에는 예약 기능도 보이지만 오각 제안에서는 카카오를 예약 창구로 사용하지 않습니다.</p>
         </div>
       </details>
     </section>
@@ -532,7 +546,7 @@
     </section>
 
     <footer>
-      <div>오각 온라인 홍보 준비 제안서 · 내부 검토용<br>원본 문서: <a href="ogak-initial-marketing-setup-proposal-2026-08.md">ogak-initial-marketing-setup-proposal-2026-08.md</a> v0.3.4</div>
+      <div>오각 온라인 홍보 준비 제안서 · 내부 검토용<br>원본 문서: <a href="ogak-initial-marketing-setup-proposal-2026-08.md">ogak-initial-marketing-setup-proposal-2026-08.md</a> v0.3.5</div>
       <div>공개 게시·외부 전송·계정과 개인정보 설정 변경은 조윤호가 마지막으로 확인합니다<br>10월 1일은 오각향 오픈일입니다.</div>
     </footer>
   </main>
